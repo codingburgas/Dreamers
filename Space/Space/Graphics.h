@@ -1,35 +1,36 @@
-#ifndef Game_Graphics
-#define Game_Graphics
-#include <SDL.h>
+#ifndef Game_Graphics_H
+#define Game_Graphics_H
+#include <SDL.h> // Include the SDL library
+#include <iostream>
 
 class GameGraphics {
 
 public:
 
-	static const int SCREEN_WIDTH = 800;
-	static const int SCREEN_HEIGHT = 600;
+	// Constants for screen size
+	static const int screenWidth = 800;
+	static const int screenHeight = 600;
+
+	static GameGraphics* Instance(); // Singleton pattern: get the Instance of GameGraphics
+
+	static void Release(); // Singleton pattern: get the Instance of GameGraphics
+
+	static bool Initialized(); 
+
+	void Render(); // Render function to display graphics
 
 private:
-	static GameGraphics* sInstance;
-	static bool sInitialized;
-	SDL_Window* mWindow;
-	SDL_Surface* mBackBuffer;
 
-	SDL_Renderer* mRenderer;
-public:
-	static GameGraphics* Instance();
-	static void Release();
-	static bool Initialized();
-	SDL_Texture* LoadTexture(std::string path);
-	void ClearBackBuffer();
-	void DrawTexture(SDL_Texture* tex, SDL_Rect* clip = NULL, SDL_Rect* rend = NULL);
-	void Render();
+	static GameGraphics* singletonInstance;
+	static bool singletonInitialized;
 
-private:
-	GameGraphics();
-	~GameGraphics();
+	SDL_Window* mainWindow; // SDL window used for rendering
+	SDL_Surface* mainBackBuffer;
 
-	bool Init();
+	GameGraphics(); // Constructor to enforce singleton pattern
+	~GameGraphics(); // Destructor to clean up resources
+
+	bool Init(); // Initialize the GameGraphics instance
 };
 
 #endif
