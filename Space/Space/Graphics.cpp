@@ -7,7 +7,7 @@ GameGraphics* GameGraphics::Instance()
 {
 	if (singletonInstance == NULL)
 	{
-		singletonInstance = new GameGraphics();
+		singletonInstance = new GameGraphics(); // Create a new GameGraphics instance and assing it to singletonInstance
 		return singletonInstance;
 	}
 }
@@ -19,6 +19,8 @@ void GameGraphics::Release()
 
 	singletonInitialized = false;
 }
+
+// Check if GameGraphics has been initialized
 bool GameGraphics::Initialized()
 {
 	return Initialized;
@@ -26,7 +28,7 @@ bool GameGraphics::Initialized()
 
 GameGraphics::GameGraphics() {
 	mainBackBuffer = NULL;
-	singletonInitialized = Init();
+	singletonInitialized = Init(); // Initialize the signleton instance and update the initialization status
 }
 GameGraphics::~GameGraphics()
 {
@@ -36,6 +38,7 @@ GameGraphics::~GameGraphics()
 	SDL_Quit();
 }
 
+// Initialize SDL and create the main window
 bool GameGraphics::Init()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -46,15 +49,18 @@ bool GameGraphics::Init()
 
 	mainWindow = SDL_CreateWindow("Dreamers Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 	
+	// Check if window creation was succesful
 	if (mainWindow == NULL)
 	{
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		return false;
 	}
 
-	mainBackBuffer = SDL_GetWindowSurface(mainWindow);
+	mainBackBuffer = SDL_GetWindowSurface(mainWindow); // Obtain the surface of the main window and assign it to mainBackBuffer
 	return true;
 }
+
+// Update the window surface
 void GameGraphics::Render()
 {
 	SDL_UpdateWindowSurface(mainWindow);
