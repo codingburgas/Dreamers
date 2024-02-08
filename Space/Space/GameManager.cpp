@@ -1,31 +1,31 @@
 #include "GameManager.h"
 
-GameManager* GameManager::sInstance = NULL;
+GameManager* GameManager::singletonInstance = NULL;
 
 GameManager* GameManager::Instance()
 {
 	// Create a new instance if it doesn't exist
-	if (sInstance == NULL)
+	if (singletonInstance == NULL)
 	{
-		sInstance = new GameManager();
-		return sInstance;
+		singletonInstance = new GameManager();
+		return singletonInstance;
 	}
 }
 
 void GameManager::Release() {
-	delete sInstance;
-	sInstance = NULL;
+	delete singletonInstance;
+	singletonInstance = NULL;
 }
 
 // Constructor
 GameManager::GameManager()
 {
-	mQuit = false;
-	mGraphics = GameGraphics::Instance(); // Obtain a singleton instance of the GameGraphics class for rendering
+	mainQuit = false;
+	mainGraphics = GameGraphics::Instance(); // Obtain a singleton instance of the GameGraphics class for rendering
 
 	// Check if GameGraphics initialization failed
 	if (!GameGraphics::Initialized()) {
-		mQuit = true;
+		mainQuit = true;
 	}
 }
 
@@ -34,22 +34,22 @@ GameManager::~GameManager()
 {
 	// Destructor releases resources, including calling the finction
 	GameGraphics::Release();
-	mGraphics = NULL;
+	mainGraphics = NULL;
 }
 
 void GameManager::Run() {
 	// Continue the game  
-	while (!mQuit)
+	while (!mainQuit)
 	{
 		// Continuously check and handle SDL events
-		while (SDL_PollEvent(&mEvents) != 0)
+		while (SDL_PollEvent(&mainEvents) != 0)
 		{
 			// Check if the SDL event type is a request to quit the game
-			if (mEvents.type == SDL_QUIT)
+			if (mainEvents.type == SDL_QUIT)
 			{
-				mQuit = true; 
+				mainQuit = true; 
 			}
-			mGraphics->Render(); // Render graphics
+			mainGraphics->Render(); // Render graphics
 		}
 	}
 }

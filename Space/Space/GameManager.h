@@ -7,11 +7,11 @@ class GameManager {
 
 private:
 
-	static GameManager* sInstance;
-	bool mQuit;   // Flag to indicate if the game shoul guit
-	GameGraphics* mGraphics; // Responsible for managing graphics and rendering
+	static GameManager* singletonInstance;
+	bool mainQuit;   // Flag to indicate if the game shoul guit
+	GameGraphics* mainGraphics; // Responsible for managing graphics and rendering
 
-	SDL_Event mEvents; // SDL event handler for managing user input and events
+	SDL_Event mainEvents; // SDL event handler for managing user input and events
 
 	GameManager();
 	~GameManager();
