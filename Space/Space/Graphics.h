@@ -1,5 +1,4 @@
-#ifndef Game_Graphics_H
-#define Game_Graphics_H
+#pragma once
 #include <SDL.h> // Include the SDL library
 #include <iostream>
 
@@ -32,5 +31,3 @@ private:
 
 	bool Init(); // Initialize the GameGraphics instance
 };
-
-#endif

@@ -1,11 +1,11 @@
 #include "Graphics.h"
 
-GameGraphics* GameGraphics::singletonInstance = NULL;
+GameGraphics* GameGraphics::singletonInstance = nullptr;
 bool GameGraphics::singletonInitialized = false;
 
 GameGraphics* GameGraphics::Instance()
 {
-	if (singletonInstance == NULL)
+	if (singletonInstance == nullptr)
 	{
 		singletonInstance = new GameGraphics(); // Create a new GameGraphics instance and assing it to singletonInstance
 		return singletonInstance;

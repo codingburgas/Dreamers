@@ -1,5 +1,4 @@
-#ifndef GAME_MANAGER_H
-#define GAME_MANAGER_H
+#pragma once
 #include "Graphics.h"
 #include <iostream>
 
@@ -24,5 +23,3 @@ public:
 	void Run(); // Main game loop
 
 };
-
-#endif
