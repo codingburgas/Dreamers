@@ -55,8 +55,31 @@ bool GameGraphics::Init()
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		return false;
 	}
+	mainBackBuffer = SDL_GetWindowSurface(mainWindow);// Obtain the surface of the main window and assign it to mainBackBuffer
 
-	mainBackBuffer = SDL_GetWindowSurface(mainWindow); // Obtain the surface of the main window and assign it to mainBackBuffer
+	int imgFlags = IMG_INIT_PNG;
+	if ((IMG_Init(imgFlags) & imgFlags) != imgFlags)
+	{
+		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+
+	}
+
+	SDL_Surface* surface = IMG_Load("Background2.png");
+	if (!surface)
+	{
+		printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
+		// Handle image loading error
+	}
+
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!texture)
+	{
+		printf("Unable to create texture from image! SDL Error: %s\n", SDL_GetError());
+		// Handle texture creation error
+	}
+
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
 	return true;
 }
 

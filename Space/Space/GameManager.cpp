@@ -27,6 +27,7 @@ GameManager::GameManager()
 	if (!GameGraphics::Initialized()) {
 		mainQuit = true;
 	}
+	mTimer = Timer::Instance();
 }
 
 // Destructor
@@ -35,12 +36,17 @@ GameManager::~GameManager()
 	// Destructor releases resources, including calling the finction
 	GameGraphics::Release();
 	mainGraphics = NULL;
+
+	Timer::Release();
+	mTimer = NULL;
 }
 
 void GameManager::Run() {
 	// Continue the game  
 	while (!mainQuit)
 	{
+		mTimer->Update();
+
 		// Continuously check and handle SDL events
 		while (SDL_PollEvent(&mainEvents) != 0)
 		{
@@ -49,7 +55,13 @@ void GameManager::Run() {
 			{
 				mainQuit = true; 
 			}
+		}
+
+		if (mTimer->DeltaTime() >= 1.0f / FRAME_RATE)
+		{
+			printf("DeltaTime: %F\n", mTimer->DeltaTime()); // Print the elapsed time( delta time) since the last frame in seconds to the console
 			mainGraphics->Render(); // Render graphics
+			mTimer->Reset(); // Reset the timer to its initial state
 		}
 	}
 }
