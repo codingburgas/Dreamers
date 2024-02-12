@@ -41,12 +41,12 @@ GameManager::~GameManager()
 	mTimer = NULL;
 }
 
-void GameManager::Run() {
+void GameManager::Run()
+{
 	// Continue the game  
 	while (!mainQuit)
 	{
 		mTimer->Update();
-
 		// Continuously check and handle SDL events
 		while (SDL_PollEvent(&mainEvents) != 0)
 		{

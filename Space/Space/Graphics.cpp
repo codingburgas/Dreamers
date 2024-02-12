@@ -64,7 +64,7 @@ bool GameGraphics::Init()
 
 	}
 
-	SDL_Surface* surface = IMG_Load("Background2.png");
+	SDL_Surface* surface = IMG_Load("Assets//Buttons.png");
 	if (!surface)
 	{
 		printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
