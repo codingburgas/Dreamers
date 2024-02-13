@@ -1,5 +1,6 @@
 #pragma once
 #include "MathHelper.h"
+
 class GameEntity {
 
 public:
@@ -9,8 +10,8 @@ public:
 	GameEntity(float x = 0.0f, float y = 0.0f);
 	~GameEntity();
 
-	void SetPosition(Vector2 newPosition); // Get the position of the entity
-	Vector2 GetPosition(SPACE space = world); // Allows specifying the coordinate space
+	void Pos(Vector2 newPosition); // Get the position of the entity
+	Vector2 Pos(SPACE space = world); // Allows specifying the coordinate space
 	void Rotation(float rotation); // Get the rotation of the entity
 	float Rotation(SPACE space = world); // Allows specifying the coordinate space
 
