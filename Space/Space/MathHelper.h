@@ -1,7 +1,7 @@
 #include <math.h>
 
-const float DEG_TO_RAD = PI / 180.0F; // Conversion factor from degrese to radians
 const float PI = 3.14159265f; // PI value
+const float DEG_TO_RAD = PI / 180.0F; // Conversion factor from degrese to radians
 
 // 2D Vector structure
 struct Vector2 {
@@ -39,7 +39,7 @@ inline Vector2 operator-(const Vector2& Ihs, const Vector2& rhs) {
 }
 
 // Function to rotate a vector by a specified angle in degrees
-Vector2 RotateVector(Vector2& vec, float angle)
+inline Vector2 RotateVector(Vector2& vec, float angle)
 {
 	float radAngle = (float)(angle * DEG_TO_RAD); // Convert angle to radians
 	// Returns a new Vector2 representing the input vector rotated by the specified angle

@@ -1,5 +1,6 @@
 #include "GameEntity.h"
 
+
 GameEntity::GameEntity(float x, float y)
 {
 	// Set the initial position coordinates of the entity
@@ -47,3 +48,4 @@ void GameEntity::Rotation(float r)
 	if (rotationAngle < 0.0f)
 		rotationAngle += 360.0f;
 }
+
