@@ -57,9 +57,9 @@ void GameManager::Run()
 			}
 		}
 
-		if (mTimer->DeltaTime() >= 1.0f / FRAME_RATE)
+		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE))
 		{
-			printf("DeltaTime: %F\n", mTimer->DeltaTime()); // Print the elapsed time( delta time) since the last frame in seconds to the console
+			mainGraphics->ClearBackBuffer();
 			mainGraphics->Render(); // Render graphics
 			mTimer->Reset(); // Reset the timer to its initial state
 		}

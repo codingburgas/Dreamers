@@ -119,5 +119,5 @@ void GameGraphics::DrawTexture(SDL_Texture* texture) {
 // Update the window surface
 void GameGraphics::Render()
 {
-	SDL_UpdateWindowSurface(mainWindow);
+	SDL_RenderPresent(renderer);
 }

@@ -18,6 +18,10 @@ public:
 
 	static bool Initialized(); 
 
+	SDL_Texture* LoadTexture(std::string path); // Load a texture from the specified file path and return the created SDL_Texture*
+	void ClearBackBuffer();
+	void DrawTexture(SDL_Texture* texture); // Draw the provided SDL_Texture* to the entire screen
+
 	void Render(); // Render function to display graphics
 
 private:
@@ -28,11 +32,6 @@ private:
 	SDL_Window* mainWindow; // SDL window used for rendering
 	SDL_Surface* mainBackBuffer;
 	SDL_Renderer* renderer;
-
-	void ClearBackBuffer();
-	SDL_Texture* LoadTexture(std::string path); // Load a texture from the specified file path and return the created SDL_Texture*
-	void DrawTexture(SDL_Texture* texture); // Draw the provided SDL_Texture* to the entire screen
-
 
 	GameGraphics(); // Constructor to enforce singleton pattern
 	~GameGraphics(); // Destructor to clean up resources
