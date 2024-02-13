@@ -49,3 +49,45 @@ void GameEntity::Rotation(float r)
 		rotationAngle += 360.0f;
 }
 
+
+
+// Returns the rotation of the GameEntity in the specified space
+// If in local space or has no parent, returns the local rotation
+// If in world space, returns the accumulated rotation of itself and its parent
+float GameEntity::Rotation(SPACE space)
+{
+	if (space == local || parentEntity == NULL)
+		return rotationAngle;
+	return parentEntity->Rotation(world) + rotationAngle;
+}
+void GameEntity::Active(bool active)
+{
+	isActive = active;
+}
+bool GameEntity::Active()
+{
+	return isActive;
+}
+
+// Sets the parent GameEntity of the current GameEntity
+// Adjusts the position in world space accordingly
+void GameEntity::Parent(GameEntity* parent)
+{
+	position = Pos(world) - parent->Pos(world);
+
+	parentEntity = parent;
+}
+
+// Returns the parent GameEntity of the current GameEntity
+GameEntity* GameEntity::Parent()
+{
+	return parentEntity;
+}
+void GameEntity::Update()
+{
+
+}
+void GameEntity::Render()
+{
+
+}
