@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h> // Include the SDL library
 #include <SDL_image.h>
+#include <string>
 #include <iostream>
 
 class GameGraphics {
@@ -27,6 +28,11 @@ private:
 	SDL_Window* mainWindow; // SDL window used for rendering
 	SDL_Surface* mainBackBuffer;
 	SDL_Renderer* renderer;
+
+	void ClearBackBuffer();
+	SDL_Texture* LoadTexture(std::string path);
+	void DrawTexture(SDL_Texture* tex);
+
 
 	GameGraphics(); // Constructor to enforce singleton pattern
 	~GameGraphics(); // Destructor to clean up resources

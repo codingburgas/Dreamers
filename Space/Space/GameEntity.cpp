@@ -49,8 +49,6 @@ void GameEntity::Rotation(float r)
 		rotationAngle += 360.0f;
 }
 
-
-
 // Returns the rotation of the GameEntity in the specified space
 // If in local space or has no parent, returns the local rotation
 // If in world space, returns the accumulated rotation of itself and its parent

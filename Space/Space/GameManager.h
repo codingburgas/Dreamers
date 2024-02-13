@@ -2,6 +2,7 @@
 #include "Graphics.h"
 #include <iostream>
 #include "Timer.h"
+#include "GameEntity.h"
 
 class GameManager {
 
