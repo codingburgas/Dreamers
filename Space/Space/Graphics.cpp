@@ -41,12 +41,13 @@ GameGraphics::~GameGraphics()
 // Initialize SDL and create the main window
 bool GameGraphics::Init()
 {
+	// Initializes the SDL video subsystem for handling graphical output
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 		return false;
 	}
-
+	// Create a window at the specified position with given dimensions
 	mainWindow = SDL_CreateWindow("Dreamers Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
 	
 	// Check if window creation was succesful
@@ -55,18 +56,24 @@ bool GameGraphics::Init()
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		return false;
 	}
+	// Create a rednerer for the main window with accelerated rendering
 	renderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
 	if (renderer == NULL)
 	{
 		printf("Renderer Creation Error: %s\n", SDL_GetError());
 		return false;
 	}
+	// Set the render draw color to white
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+	// Initialize the IMG library for PNG image loading
 	int flags = IMG_INIT_PNG;
 	if (!(IMG_Init(flags) & flags)) {
 		printf("IMG Initialization Error: %s\n", IMG_GetError());
 		return false;
 	}
+
+	// Get the main surface of the window
 	mainBackBuffer = SDL_GetWindowSurface(mainWindow);
 	return true;
 	
