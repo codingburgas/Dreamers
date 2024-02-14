@@ -65,6 +65,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\x64\Debug\Assets\StartMenu.png">
