@@ -1,8 +1,8 @@
 #pragma once
-#include "Graphics.h"
+#include "Texture.h"
 #include <iostream>
 #include "Timer.h"
-#include "GameEntity.h"
+
 
 class GameManager {
 
@@ -24,6 +24,8 @@ private:
 	Timer* mTimer;
 
 	SDL_Event mainEvents; // SDL event handler for managing user input and events
+
+	Texture* manageTexture;
 
 	GameManager();
 	~GameManager();

@@ -35,7 +35,6 @@ GameGraphics::~GameGraphics()
 	SDL_DestroyWindow(mainWindow);
 	mainWindow = NULL;
 	SDL_DestroyRenderer(renderer); // Destroy the SDL renderer and set the pointer to NULL for safety
-	renderer = NULL;
 
 	IMG_Quit();
 	SDL_Quit(); // Quit the SDL subsystem, releasing resources
@@ -84,18 +83,17 @@ bool GameGraphics::Init()
 // This function loads a texture from a specified file path
 SDL_Texture* GameGraphics::LoadTexture(std::string path)
 {
-	SDL_Texture* texture = NULL;
-
+	SDL_Texture* texture=NULL;
 	// Load the image surface from the file path
 	SDL_Surface* surface = IMG_Load(path.c_str());
 	if (surface == NULL)
 	{
-		printf("Image Load Error: Path(%s)\n", path.c_str(), IMG_GetError());
+		printf("Image Load Error: Path(%s) -Error %s\n", path.c_str(), IMG_GetError());
 		return texture;
 	}
 
 	// Create a texture from the loaded surface
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	texture = SDL_CreateTextureFromSurface(singletonInstance->renderer, surface);
 	if (texture == NULL)
 	{
 		printf("Create Texture Error: %s\n", SDL_GetError());
@@ -108,16 +106,17 @@ SDL_Texture* GameGraphics::LoadTexture(std::string path)
 }
 
 void GameGraphics::ClearBackBuffer() {
-	SDL_RenderClear(renderer);
+	SDL_RenderClear(singletonInstance->renderer);
 }
 
 // Draw the texture to the entire screen
 void GameGraphics::DrawTexture(SDL_Texture* texture) {
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	// The entire texture will be drawn at its ariginal size and positions
+	SDL_RenderCopy(singletonInstance->renderer, texture, NULL, NULL);
 }
 
 // Update the window surface
 void GameGraphics::Render()
 {
-	SDL_RenderPresent(renderer);
+	SDL_RenderPresent(singletonInstance->renderer);  // Present the rendered graphics on the screen using the SDL renderer
 }

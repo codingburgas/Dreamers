@@ -9,7 +9,7 @@ class GameGraphics {
 public:
 
 	// Constants for screen size
-	static const int screenWidth = 800;
+	static const int screenWidth = 1000;
 	static const int screenHeight = 600;
 
 	static GameGraphics* Instance(); // Singleton pattern: get the Instance of GameGraphics
@@ -32,6 +32,7 @@ private:
 	SDL_Window* mainWindow; // SDL window used for rendering
 	SDL_Surface* mainBackBuffer;
 	SDL_Renderer* renderer;
+	
 
 	GameGraphics(); // Constructor to enforce singleton pattern
 	~GameGraphics(); // Destructor to clean up resources

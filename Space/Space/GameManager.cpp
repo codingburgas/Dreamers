@@ -28,6 +28,11 @@ GameManager::GameManager()
 		mainQuit = true;
 	}
 	mTimer = Timer::Instance();
+
+	std::string path = SDL_GetBasePath();
+	path.append("Assets//StartMenu.png");
+	manageTexture = new Texture(path);
+	Texture* texture2 = new Texture(path);
 }
 
 // Destructor
@@ -39,6 +44,9 @@ GameManager::~GameManager()
 
 	Timer::Release();
 	mTimer = NULL;
+
+	delete manageTexture;
+	manageTexture = NULL;
 }
 
 void GameManager::Run()
@@ -60,6 +68,8 @@ void GameManager::Run()
 		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE))
 		{
 			mainGraphics->ClearBackBuffer();
+			manageTexture->Render();
+
 			mainGraphics->Render(); // Render graphics
 			mTimer->Reset(); // Reset the timer to its initial state
 		}
