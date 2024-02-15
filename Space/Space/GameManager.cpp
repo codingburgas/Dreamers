@@ -27,12 +27,13 @@ GameManager::GameManager()
 	if (!GameGraphics::Initialized()) {
 		mainQuit = true;
 	}
+
+	mainAssetManager = AssetManager::Instance();
+
 	mTimer = Timer::Instance();
 
-	std::string path = SDL_GetBasePath();
-	path.append("Assets//StartMenu.png");
-	manageTexture = new Texture(path);
-	Texture* texture2 = new Texture(path);
+	manageTexture = new Texture("StartMenu01.png");
+	Texture* texture2 = new Texture("StartMenu01.png");
 }
 
 // Destructor
@@ -41,6 +42,9 @@ GameManager::~GameManager()
 	// Destructor releases resources, including calling the finction
 	GameGraphics::Release();
 	mainGraphics = NULL;
+
+	AssetManager::Release();
+	mainAssetManager = NULL;
 
 	Timer::Release();
 	mTimer = NULL;

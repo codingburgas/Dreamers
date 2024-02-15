@@ -171,7 +171,7 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\x64\Debug\Assets\StartMenu.png" />
+    <Image Include="..\x64\Debug\Assets\StartMenu01.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

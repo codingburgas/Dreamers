@@ -1,13 +1,16 @@
 #include "Texture.h"
 
-Texture::Texture(std::string path)
+Texture::Texture(std::string filename)
 {
 	textureGraphics = GameGraphics::Instance();
-	mainTexture = textureGraphics->LoadTexture(path); // Load the texture
+	mainTexture = AssetManager::Instance()->GetTexture(filename); // Load the texture
+
+	// Querying the dimensions of the 'mainTexture' to retrieve its width and height
+	SDL_QueryTexture(mainTexture, NULL, NULL, &visualWidth, &visualHeight);
 }
+
 Texture::~Texture()
 {
-	SDL_DestroyTexture(mainTexture); // Release the texture
 	mainTexture = NULL;
 	textureGraphics = NULL;
 }

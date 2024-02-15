@@ -70,7 +70,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\x64\Debug\Assets\StartMenu.png">
+    <Image Include="..\x64\Debug\Assets\StartMenu01.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
   </ItemGroup>
