@@ -98,7 +98,28 @@ void GameManager::Run()
 					std::cout << "Right mouse button is up" << std::endl;
 				}
 			}
+			if (mainEvents.type == SDL_MOUSEBUTTONDOWN)
+			{
+				int mousePositionX, mousePositionY;
 
+				// Get the current mouse coordinates
+				SDL_GetMouseState(&mousePositionX, &mousePositionY);
+
+				// Check if the mouse is over the start button and handle the click
+				if (startButton.isMouseOverButton(mousePositionX, mousePositionY)) {
+					startButton.startGame();
+				}
+
+				// Check if the mouse is over the exit button and handle the click
+				if (exitButton.isMouseOverButton(mousePositionX, mousePositionY)) {
+					exitButton.exitGame();
+				}
+
+				// Check if the mouse is over the steps button and handle the click
+				if (stepsButton.isMouseOverButton(mousePositionX, mousePositionY)) {
+					stepsButton.stepsGame();
+				}
+			}
 			
 		}
 
