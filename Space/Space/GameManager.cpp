@@ -32,8 +32,8 @@ GameManager::GameManager()
 
 	mTimer = Timer::Instance();
 
-	manageTexture = new Texture("StartMenu01.png");
-	Texture* texture2 = new Texture("StartMenu01.png");
+	manageTexture = new Texture("Frame 29 (1).png");
+	Texture* texture2 = new Texture("Frame 29 (1).png");
 }
 
 // Destructor
@@ -53,6 +53,7 @@ GameManager::~GameManager()
 	manageTexture = NULL;
 }
 
+
 void GameManager::Run()
 {
 	// Continue the game  
@@ -63,10 +64,37 @@ void GameManager::Run()
 		while (SDL_PollEvent(&mainEvents) != 0)
 		{
 			// Check if the SDL event type is a request to quit the game
-			if (mainEvents.type == SDL_QUIT)
-			{
-				mainQuit = true; 
+			if (mainEvents.type == SDL_QUIT) {
+				mainQuit = true;
 			}
+
+			if (SDL_MOUSEMOTION == mainEvents.type) {
+				int x;
+				int y;
+				SDL_GetMouseState(&x, &y);
+				std::cout << x << " : " << y << std::endl;
+			}
+
+			if (SDL_MOUSEBUTTONDOWN == mainEvents.type)
+			{
+				if (SDL_BUTTON_LEFT == mainEvents.button.button) {
+					std::cout << "Left mouse button is down" << std::endl;
+				}
+				if (SDL_BUTTON_RIGHT == mainEvents.button.button) {
+					std::cout << "Right mouse button is down" << std::endl;
+				}
+			}
+			if (SDL_MOUSEBUTTONUP == mainEvents.type)
+			{
+				if (SDL_BUTTON_LEFT == mainEvents.button.button) {
+					std::cout << "Left mouse button is up" << std::endl;
+				}
+				if (SDL_BUTTON_RIGHT == mainEvents.button.button) {
+					std::cout << "Right mouse button is up" << std::endl;
+				}
+			}
+
+			
 		}
 
 		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE))

@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 
+class Mouse;
 class GameGraphics {
 
 public:
@@ -16,7 +17,7 @@ public:
 
 	static void Release(); // Singleton pattern: get the Instance of GameGraphics
 
-	static bool Initialized(); 
+	static bool Initialized();
 
 	SDL_Texture* LoadTexture(std::string path); // Load a texture from the specified file path and return the created SDL_Texture*
 	void ClearBackBuffer();
@@ -32,7 +33,6 @@ private:
 	SDL_Window* mainWindow; // SDL window used for rendering
 	SDL_Surface* mainBackBuffer;
 	SDL_Renderer* renderer;
-	
 
 	GameGraphics(); // Constructor to enforce singleton pattern
 	~GameGraphics(); // Destructor to clean up resources

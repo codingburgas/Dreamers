@@ -75,6 +75,9 @@ bool GameGraphics::Init()
 		return false;
 	}
 
+	bool quit = false;
+	SDL_Event mainEvents;
+
 	// Get the main surface of the window
 	mainBackBuffer = SDL_GetWindowSurface(mainWindow);
 	return true;

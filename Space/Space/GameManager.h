@@ -4,6 +4,7 @@
 #include "Timer.h"
 
 
+
 class GameManager {
 
 public:
@@ -28,6 +29,8 @@ private:
 	SDL_Event mainEvents; // SDL event handler for managing user input and events
 
 	Texture* manageTexture;
+
+	SDL_Renderer* renderer;
 
 	GameManager();
 	~GameManager();
