@@ -56,6 +56,11 @@ GameManager::~GameManager()
 
 void GameManager::Run()
 {
+	// Create the buttons area for click events
+	Button startButton(61, 163, 182, 70);
+	Button exitButton(274, 274, 182, 71);
+	Button stepsButton(486, 164, 182, 69);
+
 	// Continue the game  
 	while (!mainQuit)
 	{

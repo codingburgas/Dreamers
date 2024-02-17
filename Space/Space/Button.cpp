@@ -14,3 +14,20 @@ bool Button::isMouseOverButton(int mousePositionX, int mousePositionY) {
 	return mousePositionX >= buttonRect.x && mousePositionX <= buttonRect.x + buttonRect.w &&
 		mousePositionY >= buttonRect.y && mousePositionY <= buttonRect.y + buttonRect.h;
 }
+
+// Initialize when the start button is clicked
+void Button::startGame() {
+	std::cout << "StartButton Clicked!" << std::endl;
+}
+
+// Initialize when the exit button is clicked
+void Button::exitGame() {
+	std::cout << "ExitButton Clicked!" << std::endl;
+}
+
+
+// Initialize when the steps button is clicked
+void Button::stepsGame() {
+	std::cout << "StepsButton Clicked!" << std::endl;
+}
+
