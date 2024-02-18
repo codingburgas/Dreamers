@@ -32,7 +32,16 @@ private:
 	Texture* manageTexture;
 
 	SDL_Renderer* renderer;
+	enum AppState currentState;
 
 	GameManager();
 	~GameManager();
+};
+
+// Enumeration representing different states of the game
+enum AppState {
+	STATE_MAIN_MENU,
+	STATE_GAME,
+	STATE_STEPS,
+	STATE_EXIT
 };

@@ -97,5 +97,11 @@
     <Image Include="..\x64\Debug\Assets\Frame 29 (1).png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
+    <Image Include="..\x64\Debug\Assets\Frame 30.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Frame 30 (1) - Copy.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>

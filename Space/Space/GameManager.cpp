@@ -22,6 +22,7 @@ GameManager::GameManager()
 {
 	mainQuit = false;
 	mainGraphics = GameGraphics::Instance(); // Obtain a singleton instance of the GameGraphics class for rendering
+	currentState = STATE_MAIN_MENU;
 
 	// Check if GameGraphics initialization failed
 	if (!GameGraphics::Initialized()) {
@@ -107,26 +108,51 @@ void GameManager::Run()
 
 				// Check if the mouse is over the start button and handle the click
 				if (startButton.isMouseOverButton(mousePositionX, mousePositionY)) {
-					startButton.startGame();
+					currentState = STATE_GAME;
 				}
 
 				// Check if the mouse is over the exit button and handle the click
 				if (exitButton.isMouseOverButton(mousePositionX, mousePositionY)) {
-					exitButton.exitGame();
+					currentState = STATE_EXIT;
 				}
 
 				// Check if the mouse is over the steps button and handle the click
 				if (stepsButton.isMouseOverButton(mousePositionX, mousePositionY)) {
-					stepsButton.stepsGame();
+					currentState = STATE_STEPS;
 				}
 			}
-			
+
 		}
+
 
 		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE))
 		{
 			mainGraphics->ClearBackBuffer();
-			manageTexture->Render();
+
+			// Use a switch statement to determine the current state of the game
+			switch (currentState)
+			{
+			// If the game is in the main menu state
+			case STATE_MAIN_MENU:
+				manageTexture->Render(); // Render the textures associated with the main menu
+				break;
+
+			// If the game is in the game state
+			case STATE_GAME:
+				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+				SDL_RenderDrawLine(renderer, 0, 0, 640, 480);
+				break;
+			// If the game is in the steps state
+			case STATE_STEPS:
+				break;
+
+			case STATE_EXIT :
+				mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
+				break;
+			default:
+				break;
+			}
+
 
 			mainGraphics->Render(); // Render graphics
 			mTimer->Reset(); // Reset the timer to its initial state
