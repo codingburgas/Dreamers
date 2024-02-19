@@ -103,5 +103,26 @@
     <Image Include="..\x64\Debug\Assets\Frame 30 (1) - Copy.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
+    <Image Include="..\x64\Debug\Assets\Frame 25.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Frame 31.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Frame 52.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Frame 31 (1).png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Steps Frame.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Steps1.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Steps2.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>

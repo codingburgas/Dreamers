@@ -31,6 +31,15 @@ private:
 
 	Texture* manageTexture;
 
+	Texture* manageTexture2; // Used for displaying image in steps state
+	SDL_Texture* texture3;
+
+	Texture* manageTexture4;
+	SDL_Texture* texture4;
+
+	Texture* managerTexture5;
+	SDL_Texture* texture5;
+
 	SDL_Renderer* renderer;
 	enum AppState currentState;
 
@@ -43,5 +52,8 @@ enum AppState {
 	STATE_MAIN_MENU,
 	STATE_GAME,
 	STATE_STEPS,
-	STATE_EXIT
+	STATE_EXIT,
+	STATE_STEPS1,
+	STATE_STEPS2,
+	STATE_STEPS3
 };

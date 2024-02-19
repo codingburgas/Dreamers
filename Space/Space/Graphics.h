@@ -23,6 +23,7 @@ public:
 	void ClearBackBuffer();
 	void DrawTexture(SDL_Texture* texture); // Draw the provided SDL_Texture* to the entire screen
 
+
 	void Render(); // Render function to display graphics
 
 private:
