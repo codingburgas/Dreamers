@@ -76,52 +76,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\x64\Debug\Assets\StartMenu01.png">
+    <Image Include="..\x64\Debug\Assets\Start-Menu.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
-    <Image Include="..\x64\Debug\Assets\Mousecursor.png">
+    <Image Include="..\x64\Debug\Assets\Steps-Page0.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
-    <Image Include="..\x64\Debug\Assets\Txts0.png">
+    <Image Include="..\x64\Debug\Assets\Steps-Page1.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 18.png">
+    <Image Include="..\x64\Debug\Assets\Steps-Page2.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 29.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 30 (1).png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 29 (1).png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 30.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 30 (1) - Copy.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 25.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 31.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 52.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Frame 31 (1).png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Steps Frame.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Steps1.png">
-      <Filter>Resource Files\Assets</Filter>
-    </Image>
-    <Image Include="..\x64\Debug\Assets\Steps2.png">
+    <Image Include="..\x64\Debug\Assets\Steps-Page3.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
   </ItemGroup>

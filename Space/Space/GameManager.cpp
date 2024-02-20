@@ -33,8 +33,7 @@ GameManager::GameManager()
 
 	mTimer = Timer::Instance();
 
-	manageTexture = new Texture("Frame 29 (1).png");
-	Texture* texture2 = new Texture("Frame 29 (1).png");
+	manageTexture = new Texture("Start-Menu.png");
 }
 
 // Destructor
@@ -52,25 +51,28 @@ GameManager::~GameManager()
 
 	delete manageTexture;
 	manageTexture = NULL;
-
-	delete manageTexture2;
-	manageTexture2 = NULL;
 }
 
 
 void GameManager::Run()
 {
 	// Create the buttons area for click events
-	Button startButton(61, 163, 182, 70);
-	Button exitButton(274, 274, 182, 71);
-	Button stepsButton(486, 164, 182, 69);
-	Button backButton(22, 22, 39, 26);
-	Button goButton(932, 32, 43, 23);
+	Button startButton(61, 163, 182, 70); // Start the game from the main menu
+	Button exitButton(274, 274, 182, 71); // Exit the game from the main menu
+	Button stepsButton(486, 164, 182, 69); // Go to steps from the mein menu
+	Button backButton(22, 22, 39, 26); // Go to previous pages, used in steps pages
+	Button nextPageButton(932, 32, 43, 23); // Go to one page ahead, used in steps pages
+	Button stageMenuButton(849,24,319,43); // In the last step page, load the main menu
+	Button stagePLayButton(792,95,123,183); // In the last step page, play the game
+	Button stageExitButton(850,168,122,29); // In the last step page, exit the window
+
+	int stepsPage = 0; // Initialize the pages, used to specify the page or to load the numbers of the pages
 
 	// Continue the game  
 	while (!mainQuit)
 	{
 		mTimer->Update();
+
 		// Continuously check and handle SDL events
 		while (SDL_PollEvent(&mainEvents) != 0)
 		{
@@ -106,58 +108,101 @@ void GameManager::Run()
 			}
 			if (mainEvents.type == SDL_MOUSEBUTTONDOWN)
 			{
+				// Variables to store the current mouse cursor position on the X-axis and position on the Y-axis
 				int mousePositionX, mousePositionY;
 
 				// Get the current mouse coordinates
 				SDL_GetMouseState(&mousePositionX, &mousePositionY);
 
 				// Check if the mouse is over the start button and handle the click
-				if (startButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) {
+				if (startButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) 
+				{
 					currentState = STATE_GAME;
 				}
 
 				// Check if the mouse is over the exit button and handle the click
-				if (exitButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) {
+				if (exitButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU)
+				{
+					mainQuit = true; // Exit the main menu
 					currentState = STATE_EXIT;
 				}
 
 				// Check if the mouse is over the steps button and handle the click
-				if (stepsButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) {
+				if (stepsButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) 
+				{
 					currentState = STATE_STEPS;
 
 					// Creating a new Texture object using the constructor with
-					GameManager::manageTexture2 = new Texture("Steps1.png");
-					Texture* texture3 = new Texture("Steps1.png");
+					manageTexture = new Texture("Steps-Page0.png");
 				}
 
+				// Check if the backButton is clicked and the current state is STATE_STEPS
 				if (backButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
 				{
-					std::cout << "asdasd";
-
-					currentState = STATE_MAIN_MENU;
+					if (stepsPage == 0)
+					{
+						currentState = STATE_MAIN_MENU; // Go back to the main menu
+						manageTexture = new Texture("Start-Menu.png");
+						continue; // Continue to the next iteration of the loop
+					}
+					// Decrement stepsPage and load the corresponding texture
+					stepsPage--;
+					LoadTexture(stepsPage); // Or load the previous step page
+					continue;
 				}
 
-				if (goButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS) {
-
-					GameManager::manageTexture4 = new Texture("Steps2.png");
-					Texture* texture4 = new Texture("Steps2.png");
-					currentState = STATE_STEPS1;
-
-				}
-				if (backButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS1)
+				// Fixes the button and continues until the pages run out
+				// Do nothing if on the last page or load the next step page
+				if (nextPageButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
 				{
-					std::cout << "asdasd";
-
-					currentState = STATE_STEPS;
+					// Check if stepsPage is 3
+					if (stepsPage == 3)
+					{
+						continue;
+					}
+					// Increment stepsPage and load the corresponding texture
+					stepsPage++;
+					LoadTexture(stepsPage);
+					continue;
 				}
-				if (goButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS2)
+
+				// Go back to the main menu if on the last page
+				if (stageMenuButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
 				{
-					currentState = STATE_STEPS3;
+					// Check if stepsPage is 3
+					if (stepsPage == 3) 
+					{
+						// If so, go back to the main menu and set a new texture
+						currentState = STATE_MAIN_MENU;
+						manageTexture = new Texture("Start-Menu.png");
+						continue;
+					}
+				}
+
+				// Go to the game and start game if on the last page
+				if (stagePLayButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
+				{
+					// Check if stepsPage is 3
+					if (stepsPage == 3)
+					{
+						currentState = STATE_GAME;
+						continue;
+					}
+				}
+
+				// Exit the game if on the last page
+				if (stageExitButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
+				{
+					// Check if stepsPage is 3
+					if (stepsPage == 3)
+					{
+						mainQuit = true;
+						continue;// Give the state to exit the game
+					}
 				}
 			}
 
 		}
-
 
 		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE))
 		{
@@ -176,30 +221,49 @@ void GameManager::Run()
 				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 				SDL_RenderDrawLine(renderer, 0, 0, 640, 480);
 				break;
+
 			// If the game is in the steps state
 			case STATE_STEPS:
-				manageTexture2->Render();
-
+				manageTexture->Render(); // Render all images from all pages of steps
 				break;
 
 			case STATE_EXIT :
 				mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
 				break;
 
-			case STATE_STEPS1:
-				manageTexture4->Render();
-				break;
-			case STATE_STEPS2:
-
-				break;
 			default:
 				break;
 			}
-
-
 			mainGraphics->Render(); // Render graphics
 			mTimer->Reset(); // Reset the timer to its initial state
 		}
+	}
+}
+
+void GameManager::LoadTexture(int stepsPage)
+{
+	// Switch statement to load different textures based on the stepsPage value
+	switch (stepsPage)
+	{
+		// Step-Page 0
+	case 0:
+		manageTexture = new Texture("Steps-Page0.png");
+		break;
+
+		// Step-Page 1
+	case 1:
+		manageTexture = new Texture("Steps-Page1.png");
+		break;
+
+		//Step-Page 2
+	case 2:
+		manageTexture = new Texture("Steps-Page2.png");
+		break;
+
+		//Step-Page 3
+	case 3:
+		manageTexture = new Texture("Steps-Page3.png");
+		break;
 	}
 }
 

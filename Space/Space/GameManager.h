@@ -15,6 +15,8 @@ public:
 
 	void Run(); // Main game loop
 
+	void LoadTexture(int stepsPage);
+
 private:
 
 	static GameManager* singletonInstance;
@@ -29,19 +31,10 @@ private:
 
 	SDL_Event mainEvents; // SDL event handler for managing user input and events
 
-	Texture* manageTexture;
-
-	Texture* manageTexture2; // Used for displaying image in steps state
-	SDL_Texture* texture3;
-
-	Texture* manageTexture4;
-	SDL_Texture* texture4;
-
-	Texture* managerTexture5;
-	SDL_Texture* texture5;
+	Texture* manageTexture; // Load the Textures from the states
 
 	SDL_Renderer* renderer;
-	enum AppState currentState;
+	enum AppState currentState; // Enum variable to track the current state of the application
 
 	GameManager();
 	~GameManager();
@@ -49,11 +42,8 @@ private:
 
 // Enumeration representing different states of the game
 enum AppState {
-	STATE_MAIN_MENU,
-	STATE_GAME,
-	STATE_STEPS,
-	STATE_EXIT,
-	STATE_STEPS1,
-	STATE_STEPS2,
-	STATE_STEPS3
+	STATE_MAIN_MENU, // State to take us to the main menu
+	STATE_GAME, // State to take is to ply game
+	STATE_STEPS, // State to take us to the steps pages
+	STATE_EXIT // State to exit the game
 };
