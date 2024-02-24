@@ -97,7 +97,7 @@ SDL_Texture* GameGraphics::LoadTexture(std::string path)
 
 	// Create a texture from the loaded surface
 	texture = SDL_CreateTextureFromSurface(singletonInstance->renderer, surface);
-	if (texture == NULL)
+	if (texture == nullptr)
 	{
 		printf("Create Texture Error: %s\n", SDL_GetError());
 		return texture;
@@ -115,7 +115,12 @@ void GameGraphics::ClearBackBuffer() {
 // Draw the texture to the entire screen
 void GameGraphics::DrawTexture(SDL_Texture* texture) {
 	// The entire texture will be drawn at its ariginal size and positions
-	SDL_RenderCopy(singletonInstance->renderer, texture, NULL, NULL);
+	SDL_RenderCopy(singletonInstance->renderer, texture, nullptr, nullptr);
+}
+
+void GameGraphics::DrawTexture(SDL_Texture* texture, SDL_Rect* destinationRect)
+{
+	SDL_RenderCopy(singletonInstance->renderer, texture, nullptr, destinationRect);
 }
 
 // Update the window surface

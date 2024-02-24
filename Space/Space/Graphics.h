@@ -22,6 +22,7 @@ public:
 	SDL_Texture* LoadTexture(std::string path); // Load a texture from the specified file path and return the created SDL_Texture*
 	void ClearBackBuffer();
 	void DrawTexture(SDL_Texture* texture); // Draw the provided SDL_Texture* to the entire screen
+	void DrawTexture(SDL_Texture* texture, SDL_Rect* destinationRect); // Draw the provided SDL_Texture* to the entire screen
 
 
 	void Render(); // Render function to display graphics

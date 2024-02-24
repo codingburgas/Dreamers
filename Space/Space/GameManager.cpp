@@ -187,7 +187,7 @@ void GameManager::LoadButtons()
 			{
 				GameManager* instance = GameManager::Instance();
 				instance->currentState = STATE_GAME;
-				instance->manageTexture1 = new Texture("Frame 10.png");
+				instance->manageTexture = new Texture("Frame 10.png");
 				return true;
 			}
 		),
@@ -242,6 +242,7 @@ void GameManager::LoadButtons()
 				// Check if stepsPage is 3
 				if (instance->stepsPage == 3)
 				{
+					instance->stepsPage = 0;
 					instance->manageTexture = new Texture("Start-Menu.png");
 					instance->currentState = STATE_MAIN_MENU;
 					return true;
@@ -255,6 +256,7 @@ void GameManager::LoadButtons()
 				// Check if stepsPage is 3
 				if (instance->stepsPage == 3)
 				{
+					instance->stepsPage = 0;
 					instance->currentState = STATE_GAME;
 					return true;
 				}
