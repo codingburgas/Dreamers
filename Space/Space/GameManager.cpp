@@ -56,69 +56,7 @@ GameManager::~GameManager()
 
 void GameManager::Run()
 {
-	// Create the buttons area for click events
-
-	// Start the game from the main menu
-
-	Button startButton(61, 163, 182, 70, STATE_MAIN_MENU, []()
-		{
-			GameManager* instance = GameManager::Instance();
-			instance->currentState = STATE_GAME;
-			instance->manageTexture1 = new Texture("Frame 10.png");
-			return true;
-		}
-	);
-	Button exitButton(274, 274, 182, 71, STATE_MAIN_MENU, []()
-		{
-			GameManager* instance = GameManager::Instance();
-			instance ->mainQuit = true;
-			instance->currentState = STATE_EXIT;
-			return true;
-		}
-	);
-	Button stepsButton(486, 164, 182, 69, STATE_MAIN_MENU, []()
-		{
-			GameManager* instance = GameManager::Instance();
-			instance->currentState = STATE_STEPS;
-			instance->manageTexture = new Texture("Steps-Page0.png");
-			return true;
-		}
-	);
-	Button backButton(22, 22, 39, 26, STATE_STEPS, []()
-		{
-			GameManager* instance = GameManager::Instance();
-			if (instance->stepsPage == 0)
-			{
-				instance->currentState = STATE_MAIN_MENU; // Go back to the main menu
-				instance->manageTexture = new Texture("Start-Menu.png");
-				return true; // Continue to the next iteration of the loop
-			}
-			// Decrement stepsPage and load the corresponding texture
-			instance->stepsPage--;
-			instance->LoadTexture(instance->stepsPage); // Or load the previous step page
-			return true;
-		}
-	);
-	Button nextPageButton(932, 32, 43, 23, STATE_STEPS, []()
-		{
-			GameManager* instance = GameManager::Instance();
-			// Check if stepsPage is 3
-			if (instance->stepsPage == 3)
-			{
-				return false;
-			}
-			// Increment stepsPage and load the corresponding texture
-			instance->stepsPage++;
-			instance->LoadTexture(instance->stepsPage);
-			return true;
-		}
-	);
-	Button stageMenuButton(849,24,319,43); 
-	Button stagePLayButton(792,95,123,183); 
-	Button stageExitButton(850,168,122,29);
-	Button bookButton(730, 518, 106, 583);
-
-
+	LoadButtons();
 	// Continue the game  
 	while (!mainQuit)
 	{
@@ -165,61 +103,12 @@ void GameManager::Run()
 				// Get the current mouse coordinates
 				SDL_GetMouseState(&mousePositionX, &mousePositionY);
 
-
-				startButton.click(mousePositionX, mousePositionY, currentState);
-				exitButton.click(mousePositionX, mousePositionY, currentState);
-				stepsButton.click(mousePositionX, mousePositionY, currentState);
-
-				// Check if the backButton is clicked and the current state is STATE_STEPS
-				if (backButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
+				for (size_t i = 0; i < buttons.size(); i++)
 				{
-				}
-
-				// Fixes the button and continues until the pages run out
-				// Do nothing if on the last page or load the next step page
-				if (nextPageButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
-				{
-					
-				}
-
-				// Go back to the main menu if on the last page
-				if (stageMenuButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
-				{
-					// Check if stepsPage is 3
-					if (stepsPage == 3) 
+					if (buttons[i].click(mousePositionX, mousePositionY, currentState))
 					{
-						// If so, go back to the main menu and set a new texture
-						currentState = STATE_MAIN_MENU;
-						manageTexture = new Texture("Start-Menu.png");
-						continue;
+						break;
 					}
-				}
-
-				// Go to the game and start game if on the last page
-				if (stagePLayButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
-				{
-					// Check if stepsPage is 3
-					if (stepsPage == 3)
-					{
-						currentState = STATE_GAME;
-						continue;
-					}
-				}
-
-				// Exit the game if on the last page
-				if (stageExitButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
-				{
-					// Check if stepsPage is 3
-					if (stepsPage == 3)
-					{
-						mainQuit = true;
-						continue;// Give the state to exit the game
-					}
-				}
-				if (bookButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_GAME)
-				{
-					currentState = STATE_GAME_BOOK;
-					manageTexture2 = new Texture("Frame 48.png");
 				}
 			}
 
@@ -239,7 +128,7 @@ void GameManager::Run()
 
 			// If the game is in the game state
 			case STATE_GAME:
-				manageTexture1->Render();
+				manageTexture->Render();
 				break;
 
 			// If the game is in the steps state
@@ -290,4 +179,99 @@ void GameManager::LoadTexture(int stepsPage)
 	}
 }
 
-
+void GameManager::LoadButtons()
+{
+	buttons = std::vector<Button>
+	{
+		Button(61, 163, 182, 70, STATE_MAIN_MENU, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->currentState = STATE_GAME;
+				instance->manageTexture1 = new Texture("Frame 10.png");
+				return true;
+			}
+		),
+		Button(274, 274, 182, 71, STATE_MAIN_MENU, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->mainQuit = true;
+				instance->currentState = STATE_EXIT;
+				return true;
+			}
+		),
+		Button(486, 164, 182, 69, STATE_MAIN_MENU, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->currentState = STATE_STEPS;
+				instance->manageTexture = new Texture("Steps-Page0.png");
+				return true;
+			}
+		),
+		Button(22, 22, 39, 26, STATE_STEPS, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				if (instance->stepsPage == 0)
+				{
+					instance->currentState = STATE_MAIN_MENU; // Go back to the main menu
+					instance->manageTexture = new Texture("Start-Menu.png");
+					return true; // Continue to the next iteration of the loop
+				}
+				// Decrement stepsPage and load the corresponding texture
+				instance->stepsPage--;
+				instance->LoadTexture(instance->stepsPage); // Or load the previous step page
+				return true;
+			}
+		),
+		Button(932, 32, 43, 23, STATE_STEPS, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				// Check if stepsPage is 3
+				if (instance->stepsPage == 3)
+				{
+					return false;
+				}
+				// Increment stepsPage and load the corresponding texture
+				instance->stepsPage++;
+				instance->LoadTexture(instance->stepsPage);
+				return true;
+			}
+		),
+		Button(849, 24, 319, 43, STATE_STEPS, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				// Check if stepsPage is 3
+				if (instance->stepsPage == 3)
+				{
+					instance->manageTexture = new Texture("Start-Menu.png");
+					instance->currentState = STATE_MAIN_MENU;
+					return true;
+				}
+				return false;
+			}
+		),
+		Button(792, 95, 123, 183, STATE_STEPS, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				// Check if stepsPage is 3
+				if (instance->stepsPage == 3)
+				{
+					instance->currentState = STATE_GAME;
+					return true;
+				}
+				return false;
+			}
+		),
+		Button(850, 168, 122, 29, STATE_STEPS, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				// Check if stepsPage is 3
+				if (instance->stepsPage == 3)
+				{
+					instance->mainQuit = true;
+					return true;
+				}
+				return false;
+			}
+		)
+	};
+}
