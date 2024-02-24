@@ -48,6 +48,12 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -95,6 +101,15 @@
       <Filter>Resource Files\Assets</Filter>
     </Image>
     <Image Include="..\x64\Debug\Assets\Frame 48.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\planeta0-2.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\planeta0-0.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\planeta0-1.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
   </ItemGroup>

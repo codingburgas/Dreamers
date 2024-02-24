@@ -159,6 +159,8 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MathHelper.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="TaskManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
@@ -175,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\x64\Debug\Assets\Frame 48.png" />
+    <Image Include="..\x64\Debug\Assets\planeta0-0.png" />
+    <Image Include="..\x64\Debug\Assets\planeta0-1.png" />
+    <Image Include="..\x64\Debug\Assets\planeta0-2.png" />
     <Image Include="..\x64\Debug\Assets\Start-Menu.png" />
     <Image Include="..\x64\Debug\Assets\Steps-Page0.png" />
     <Image Include="..\x64\Debug\Assets\Steps-Page1.png" />

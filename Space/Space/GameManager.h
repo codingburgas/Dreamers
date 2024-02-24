@@ -16,15 +16,19 @@ public:
 	void Run(); // Main game loop
 	std::vector<Button> buttons;
 	void LoadButtons();
+	void LoadLevel();
+	void LoadPlanetImage();
 
 	void LoadTexture(int stepsPage);
 	int stepsPage = 0; // Initialize the pages, used to specify the page or to load the numbers of the pages
-
+	int planetHealth;
+	int currentDamage = 0;
+	int currentLevel = 0;
+	Texture* planet;
 private:
 
 	static GameManager* singletonInstance;
-	const int FRAME_RATE = 120;
-
+	const int FRAME_RATE = 60;
 	bool mainQuit;   // Flag to indicate if the game shoul guit
 	GameGraphics* mainGraphics; // Responsible for managing graphics and rendering
 

@@ -121,30 +121,31 @@ void GameManager::Run()
 			// Use a switch statement to determine the current state of the game
 			switch (currentState)
 			{
-			// If the game is in the main menu state
-			case STATE_MAIN_MENU:
-				manageTexture->Render(); // Render the textures associated with the main menu
-				break;
+				// If the game is in the main menu state
+				case STATE_MAIN_MENU:
+					manageTexture->Render(); // Render the textures associated with the main menu
+					break;
 
-			// If the game is in the game state
-			case STATE_GAME:
-				manageTexture->Render();
-				break;
+				// If the game is in the game state
+				case STATE_GAME:
+					manageTexture->Render();
+					planet->RenderDestination();
+					break;
 
-			// If the game is in the steps state
-			case STATE_STEPS:
-				manageTexture->Render(); // Render all images from all pages of steps
-				break;
+				// If the game is in the steps state
+				case STATE_STEPS:
+					manageTexture->Render(); // Render all images from all pages of steps
+					break;
 
-			case STATE_EXIT :
-				mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
-				break;
+				case STATE_EXIT:
+					mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
+					break;
 
-			case STATE_GAME_BOOK:
-				manageTexture2->Render();
+				case STATE_GAME_BOOK:
+					manageTexture2->Render();
 
-			default:
-				break;
+				default:
+					break;
 			}
 			mainGraphics->Render(); // Render graphics
 			mTimer->Reset(); // Reset the timer to its initial state
@@ -188,6 +189,7 @@ void GameManager::LoadButtons()
 				GameManager* instance = GameManager::Instance();
 				instance->currentState = STATE_GAME;
 				instance->manageTexture = new Texture("Frame 10.png");
+				instance->LoadLevel();
 				return true;
 			}
 		),
@@ -274,6 +276,54 @@ void GameManager::LoadButtons()
 				}
 				return false;
 			}
+		),
+
+
+		Button(350, 180, 350, 350, STATE_GAME, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->currentDamage++;
+				if (instance->planetHealth + 1 == instance->currentDamage)
+				{
+					instance->currentLevel++;
+					instance->currentDamage = 0;
+					if (instance->currentLevel == 4)
+					{
+						//end game
+						return true;
+					}
+					else
+					{
+						instance->LoadLevel();
+					}
+				}
+				//recieve reward;
+				instance->LoadPlanetImage();
+				return true;
+			}
 		)
 	};
+}
+
+void GameManager::LoadLevel()
+{
+	LoadPlanetImage();
+
+	switch (currentLevel)
+	{
+	case 0:
+		planetHealth = 2;
+		break;
+	case 1:
+		planetHealth = 20;
+		break;
+	default:
+		break;
+	}
+}
+
+void GameManager::LoadPlanetImage()
+{
+	std::string planetName = "planeta" + std::to_string(currentLevel) + "-" + std::to_string(currentDamage) + ".png";
+	planet = new Texture(planetName, 350, 180, 350, 350);
 }
