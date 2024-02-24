@@ -163,6 +163,7 @@
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AppStates.h" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="GameEntity.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\x64\Debug\Assets\Frame 48.png" />
     <Image Include="..\x64\Debug\Assets\Start-Menu.png" />
     <Image Include="..\x64\Debug\Assets\Steps-Page0.png" />
     <Image Include="..\x64\Debug\Assets\Steps-Page1.png" />

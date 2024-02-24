@@ -3,8 +3,7 @@
 #include <iostream>
 #include "Timer.h"
 #include "Button.h"
-
-
+#include "AppStates.h"
 
 class GameManager {
 
@@ -32,18 +31,12 @@ private:
 	SDL_Event mainEvents; // SDL event handler for managing user input and events
 
 	Texture* manageTexture; // Load the Textures from the states
+	Texture* manageTexture1;
+	Texture* manageTexture2;
 
 	SDL_Renderer* renderer;
 	enum AppState currentState; // Enum variable to track the current state of the application
 
 	GameManager();
 	~GameManager();
-};
-
-// Enumeration representing different states of the game
-enum AppState {
-	STATE_MAIN_MENU, // State to take us to the main menu
-	STATE_GAME, // State to take is to ply game
-	STATE_STEPS, // State to take us to the steps pages
-	STATE_EXIT // State to exit the game
 };

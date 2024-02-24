@@ -74,6 +74,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AppStates.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\x64\Debug\Assets\Start-Menu.png">
@@ -89,6 +92,9 @@
       <Filter>Resource Files\Assets</Filter>
     </Image>
     <Image Include="..\x64\Debug\Assets\Steps-Page3.png">
+      <Filter>Resource Files\Assets</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\Assets\Frame 48.png">
       <Filter>Resource Files\Assets</Filter>
     </Image>
   </ItemGroup>

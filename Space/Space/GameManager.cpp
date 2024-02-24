@@ -8,8 +8,8 @@ GameManager* GameManager::Instance()
 	if (singletonInstance == NULL)
 	{
 		singletonInstance = new GameManager();
-		return singletonInstance;
 	}
+	return singletonInstance;
 }
 
 void GameManager::Release() {
@@ -57,14 +57,24 @@ GameManager::~GameManager()
 void GameManager::Run()
 {
 	// Create the buttons area for click events
-	Button startButton(61, 163, 182, 70); // Start the game from the main menu
-	Button exitButton(274, 274, 182, 71); // Exit the game from the main menu
-	Button stepsButton(486, 164, 182, 69); // Go to steps from the mein menu
-	Button backButton(22, 22, 39, 26); // Go to previous pages, used in steps pages
-	Button nextPageButton(932, 32, 43, 23); // Go to one page ahead, used in steps pages
-	Button stageMenuButton(849,24,319,43); // In the last step page, load the main menu
-	Button stagePLayButton(792,95,123,183); // In the last step page, play the game
-	Button stageExitButton(850,168,122,29); // In the last step page, exit the window
+
+	// Start the game from the main menu
+
+	Button startButton(61, 163, 182, 70, STATE_MAIN_MENU, []()
+		{
+			GameManager* instance = GameManager::Instance();
+			instance->currentState = STATE_GAME;
+			instance->manageTexture1 = new Texture("Frame 10.png");
+		}
+	);
+	Button exitButton(274, 274, 182, 71);
+	Button stepsButton(486, 164, 182, 69);
+	Button backButton(22, 22, 39, 26);
+	Button nextPageButton(932, 32, 43, 23); 
+	Button stageMenuButton(849,24,319,43); 
+	Button stagePLayButton(792,95,123,183); 
+	Button stageExitButton(850,168,122,29);
+	Button bookButton(730, 518, 106, 583);
 
 	int stepsPage = 0; // Initialize the pages, used to specify the page or to load the numbers of the pages
 
@@ -117,7 +127,7 @@ void GameManager::Run()
 				// Check if the mouse is over the start button and handle the click
 				if (startButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) 
 				{
-					currentState = STATE_GAME;
+					
 				}
 
 				// Check if the mouse is over the exit button and handle the click
@@ -200,6 +210,11 @@ void GameManager::Run()
 						continue;// Give the state to exit the game
 					}
 				}
+				if (bookButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_GAME)
+				{
+					currentState = STATE_GAME_BOOK;
+					manageTexture2 = new Texture("Frame 48.png");
+				}
 			}
 
 		}
@@ -218,8 +233,7 @@ void GameManager::Run()
 
 			// If the game is in the game state
 			case STATE_GAME:
-				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-				SDL_RenderDrawLine(renderer, 0, 0, 640, 480);
+				manageTexture1->Render();
 				break;
 
 			// If the game is in the steps state
@@ -230,6 +244,9 @@ void GameManager::Run()
 			case STATE_EXIT :
 				mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
 				break;
+
+			case STATE_GAME_BOOK:
+				manageTexture2->Render();
 
 			default:
 				break;
