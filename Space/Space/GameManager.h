@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include "Button.h"
 #include "AppStates.h"
+#include <vector>
 
 class GameManager {
 
@@ -13,8 +14,11 @@ public:
 	static void Release();
 
 	void Run(); // Main game loop
+	std::vector<Button> buttons;
+	std::vector<Button> LoadButtons();
 
 	void LoadTexture(int stepsPage);
+	int stepsPage = 0; // Initialize the pages, used to specify the page or to load the numbers of the pages
 
 private:
 

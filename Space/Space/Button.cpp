@@ -1,7 +1,7 @@
 #include "Button.h"
 
 // Constructor for creating a button with given coordinates
-Button::Button(int xStart, int yStart, int xEnd, int yEnd, AppState state, void (*callBack)())
+Button::Button(int xStart, int yStart, int xEnd, int yEnd, AppState state, bool (*callBack)())
 {
 	// Initialize the buttonRect with the specified coordinates
 	buttonRect = { xStart, yStart, xEnd, yEnd };
@@ -27,12 +27,13 @@ bool Button::isMouseOverButton(int mousePositionX, int mousePositionY) {
 		mousePositionY >= buttonRect.y && mousePositionY <= buttonRect.y + buttonRect.h;
 }
 
-void Button::click(int mousePositionX, int mousePositionY, AppState currentState)
+bool Button::click(int mousePositionX, int mousePositionY, AppState currentState)
 {
 	if (isMouseOverButton(mousePositionX, mousePositionY) && currentState == state)
 	{
-		callBack();
+		return callBack();
 	}
+	return false;
 }
 
 

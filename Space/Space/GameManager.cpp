@@ -65,18 +65,59 @@ void GameManager::Run()
 			GameManager* instance = GameManager::Instance();
 			instance->currentState = STATE_GAME;
 			instance->manageTexture1 = new Texture("Frame 10.png");
+			return true;
 		}
 	);
-	Button exitButton(274, 274, 182, 71);
-	Button stepsButton(486, 164, 182, 69);
-	Button backButton(22, 22, 39, 26);
-	Button nextPageButton(932, 32, 43, 23); 
+	Button exitButton(274, 274, 182, 71, STATE_MAIN_MENU, []()
+		{
+			GameManager* instance = GameManager::Instance();
+			instance ->mainQuit = true;
+			instance->currentState = STATE_EXIT;
+			return true;
+		}
+	);
+	Button stepsButton(486, 164, 182, 69, STATE_MAIN_MENU, []()
+		{
+			GameManager* instance = GameManager::Instance();
+			instance->currentState = STATE_STEPS;
+			instance->manageTexture = new Texture("Steps-Page0.png");
+			return true;
+		}
+	);
+	Button backButton(22, 22, 39, 26, STATE_STEPS, []()
+		{
+			GameManager* instance = GameManager::Instance();
+			if (instance->stepsPage == 0)
+			{
+				instance->currentState = STATE_MAIN_MENU; // Go back to the main menu
+				instance->manageTexture = new Texture("Start-Menu.png");
+				return true; // Continue to the next iteration of the loop
+			}
+			// Decrement stepsPage and load the corresponding texture
+			instance->stepsPage--;
+			instance->LoadTexture(instance->stepsPage); // Or load the previous step page
+			return true;
+		}
+	);
+	Button nextPageButton(932, 32, 43, 23, STATE_STEPS, []()
+		{
+			GameManager* instance = GameManager::Instance();
+			// Check if stepsPage is 3
+			if (instance->stepsPage == 3)
+			{
+				return false;
+			}
+			// Increment stepsPage and load the corresponding texture
+			instance->stepsPage++;
+			instance->LoadTexture(instance->stepsPage);
+			return true;
+		}
+	);
 	Button stageMenuButton(849,24,319,43); 
 	Button stagePLayButton(792,95,123,183); 
 	Button stageExitButton(850,168,122,29);
 	Button bookButton(730, 518, 106, 583);
 
-	int stepsPage = 0; // Initialize the pages, used to specify the page or to load the numbers of the pages
 
 	// Continue the game  
 	while (!mainQuit)
@@ -124,56 +165,21 @@ void GameManager::Run()
 				// Get the current mouse coordinates
 				SDL_GetMouseState(&mousePositionX, &mousePositionY);
 
-				// Check if the mouse is over the start button and handle the click
-				if (startButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) 
-				{
-					
-				}
 
-				// Check if the mouse is over the exit button and handle the click
-				if (exitButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU)
-				{
-					mainQuit = true; // Exit the main menu
-					currentState = STATE_EXIT;
-				}
-
-				// Check if the mouse is over the steps button and handle the click
-				if (stepsButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_MAIN_MENU) 
-				{
-					currentState = STATE_STEPS;
-
-					// Creating a new Texture object using the constructor with
-					manageTexture = new Texture("Steps-Page0.png");
-				}
+				startButton.click(mousePositionX, mousePositionY, currentState);
+				exitButton.click(mousePositionX, mousePositionY, currentState);
+				stepsButton.click(mousePositionX, mousePositionY, currentState);
 
 				// Check if the backButton is clicked and the current state is STATE_STEPS
 				if (backButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
 				{
-					if (stepsPage == 0)
-					{
-						currentState = STATE_MAIN_MENU; // Go back to the main menu
-						manageTexture = new Texture("Start-Menu.png");
-						continue; // Continue to the next iteration of the loop
-					}
-					// Decrement stepsPage and load the corresponding texture
-					stepsPage--;
-					LoadTexture(stepsPage); // Or load the previous step page
-					continue;
 				}
 
 				// Fixes the button and continues until the pages run out
 				// Do nothing if on the last page or load the next step page
 				if (nextPageButton.isMouseOverButton(mousePositionX, mousePositionY) && currentState == STATE_STEPS)
 				{
-					// Check if stepsPage is 3
-					if (stepsPage == 3)
-					{
-						continue;
-					}
-					// Increment stepsPage and load the corresponding texture
-					stepsPage++;
-					LoadTexture(stepsPage);
-					continue;
+					
 				}
 
 				// Go back to the main menu if on the last page
