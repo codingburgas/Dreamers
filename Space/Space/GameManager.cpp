@@ -168,12 +168,12 @@ void GameManager::LoadTexture(int stepsPage)
 		manageTexture = new Texture("Steps-Page1.png");
 		break;
 
-		//Step-Page 2
+		// Step-Page 2
 	case 2:
 		manageTexture = new Texture("Steps-Page2.png");
 		break;
 
-		//Step-Page 3
+		// Step-Page 3
 	case 3:
 		manageTexture = new Texture("Steps-Page3.png");
 		break;
@@ -188,7 +188,6 @@ void GameManager::LoadButtons()
 			{
 				GameManager* instance = GameManager::Instance();
 				instance->currentState = STATE_GAME;
-				instance->manageTexture = new Texture("Frame 10.png");
 				instance->LoadLevel();
 				return true;
 			}
@@ -252,12 +251,13 @@ void GameManager::LoadButtons()
 				return false;
 			}
 		),
-		Button(792, 95, 123, 183, STATE_STEPS, []()
+		Button(790, 110, 110, 30, STATE_STEPS, []()
 			{
 				GameManager* instance = GameManager::Instance();
 				// Check if stepsPage is 3
 				if (instance->stepsPage == 3)
 				{
+					instance->LoadLevel();
 					instance->stepsPage = 0;
 					instance->currentState = STATE_GAME;
 					return true;
@@ -265,7 +265,7 @@ void GameManager::LoadButtons()
 				return false;
 			}
 		),
-		Button(850, 168, 122, 29, STATE_STEPS, []()
+		Button(849, 173, 129, 30, STATE_STEPS, []()
 			{
 				GameManager* instance = GameManager::Instance();
 				// Check if stepsPage is 3
@@ -297,8 +297,10 @@ void GameManager::LoadButtons()
 						instance->LoadLevel();
 					}
 				}
-				//recieve reward;
-				instance->LoadPlanetImage();
+				else
+				{
+					instance->LoadPlanetImage();
+				}
 				return true;
 			}
 		)
@@ -308,15 +310,26 @@ void GameManager::LoadButtons()
 void GameManager::LoadLevel()
 {
 	LoadPlanetImage();
+	manageTexture = new Texture("level-" + std::to_string(currentLevel)+".png");
 
 	switch (currentLevel)
 	{
+		// Venus
 	case 0:
-		planetHealth = 2;
-		break;
-	case 1:
 		planetHealth = 20;
 		break;
+		// Earth
+	case 1:
+		planetHealth = 2;
+		break;
+		// Saturn
+	case 2:
+		planetHealth = 2;
+		break;
+		// Neptune
+	case 3:
+		planetHealth = 2;
+
 	default:
 		break;
 	}
@@ -325,5 +338,5 @@ void GameManager::LoadLevel()
 void GameManager::LoadPlanetImage()
 {
 	std::string planetName = "planeta" + std::to_string(currentLevel) + "-" + std::to_string(currentDamage) + ".png";
-	planet = new Texture(planetName, 350, 180, 350, 350);
+	planet = new Texture(planetName, 300, 180, 400, 350);
 }
