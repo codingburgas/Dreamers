@@ -122,30 +122,25 @@ void GameManager::Run()
 			switch (currentState)
 			{
 				// If the game is in the main menu state
-				case STATE_MAIN_MENU:
-					manageTexture->Render(); // Render the textures associated with the main menu
-					break;
+			case STATE_GAME_BOOK:
+			case STATE_MAIN_MENU:
+			case STATE_END:
+			case STATE_STEPS:
+				manageTexture->Render(); // Render the textures associated with the main menu
+				break;
 
 				// If the game is in the game state
-				case STATE_GAME:
-					manageTexture->Render();
-					planet->RenderDestination();
-					break;
+			case STATE_GAME:
+				manageTexture->Render();
+				planet->RenderDestination();
+				break;
 
-				// If the game is in the steps state
-				case STATE_STEPS:
-					manageTexture->Render(); // Render all images from all pages of steps
-					break;
+			case STATE_EXIT:
+				mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
+				break;
 
-				case STATE_EXIT:
-					mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
-					break;
-
-				case STATE_GAME_BOOK:
-					manageTexture2->Render();
-
-				default:
-					break;
+			default:
+				break;
 			}
 			mainGraphics->Render(); // Render graphics
 			mTimer->Reset(); // Reset the timer to its initial state
@@ -179,6 +174,29 @@ void GameManager::LoadTexture(int stepsPage)
 		break;
 	}
 }
+
+void GameManager::LoadInformationTexture()
+{
+	switch (currentLevel)
+	{
+	case 0:
+		manageTexture = new Texture("Venus.png");
+		break;
+	case 1:
+		manageTexture = new Texture("Earth.png");
+		break;
+	case 2:
+		manageTexture = new Texture("Saturn.png");
+		break;
+	case 3:
+		manageTexture = new Texture("Neptune.png");
+		break;
+	default:
+		break;
+	}
+}
+
+
 
 void GameManager::LoadButtons()
 {
@@ -289,8 +307,7 @@ void GameManager::LoadButtons()
 					instance->currentDamage = 0;
 					if (instance->currentLevel == 4)
 					{
-						//end game
-						return true;
+						instance->EndGame();
 					}
 					else
 					{
@@ -303,20 +320,57 @@ void GameManager::LoadButtons()
 				}
 				return true;
 			}
-		)
+		),
+
+		Button(849, 24, 319, 43, STATE_GAME, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				// Check if stepsPage is 3
+				if (instance->stepsPage == 1)
+				{
+					instance->stepsPage = 0;
+					instance->manageTexture = new Texture("Start-Menu.png");
+					instance->currentState = STATE_MAIN_MENU;
+					return true;
+				}
+				return false;
+			}
+		),
+
+		Button(730, 500, 110, 100, STATE_GAME, []()
+			{
+				GameManager* instance = GameManager::Instance();
+
+				instance->currentState = STATE_GAME_BOOK;
+				instance->LoadInformationTexture();
+				return true;
+			}
+		),
+
+		Button(22, 22, 39, 26, STATE_GAME_BOOK, []()
+			{
+				GameManager* instance = GameManager::Instance();
+
+				instance->currentState = STATE_GAME;
+				instance->LoadPlanetImage();
+				instance->manageTexture = new Texture("level-" + std::to_string(instance->currentLevel) + ".png");
+
+				return true;
+			}
+		),
 	};
 }
 
 void GameManager::LoadLevel()
 {
 	LoadPlanetImage();
-	manageTexture = new Texture("level-" + std::to_string(currentLevel)+".png");
+	manageTexture = new Texture("level-" + std::to_string(currentLevel) + ".png");
 
 	switch (currentLevel)
 	{
 		// Venus
 	case 0:
-		planetHealth = 20;
+		planetHealth = 2;
 		break;
 		// Earth
 	case 1:
@@ -324,11 +378,11 @@ void GameManager::LoadLevel()
 		break;
 		// Saturn
 	case 2:
-		planetHealth = 2;
+		planetHealth = 3;
 		break;
 		// Neptune
 	case 3:
-		planetHealth = 2;
+		planetHealth = 3;
 
 	default:
 		break;
@@ -339,4 +393,10 @@ void GameManager::LoadPlanetImage()
 {
 	std::string planetName = "planeta" + std::to_string(currentLevel) + "-" + std::to_string(currentDamage) + ".png";
 	planet = new Texture(planetName, 300, 180, 400, 350);
+}
+
+void GameManager::EndGame()
+{
+	currentState = STATE_END;
+	manageTexture = new Texture("EndGame.png");
 }

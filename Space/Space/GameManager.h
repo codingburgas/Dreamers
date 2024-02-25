@@ -14,18 +14,20 @@ public:
 	static void Release();
 
 	void Run(); // Main game loop
-	std::vector<Button> buttons;
 	void LoadButtons();
 	void LoadLevel();
 	void LoadPlanetImage();
-
+	void EndGame();
+	void LoadInformationTexture();
 	void LoadTexture(int stepsPage);
+
 	int stepsPage = 0; // Initialize the pages, used to specify the page or to load the numbers of the pages
 	int planetHealth;
 	int currentDamage = 0;
 	int currentLevel = 0;
 	Texture* planet;
 private:
+	std::vector<Button> buttons;
 
 	static GameManager* singletonInstance;
 	const int FRAME_RATE = 60;
@@ -39,8 +41,6 @@ private:
 	SDL_Event mainEvents; // SDL event handler for managing user input and events
 
 	Texture* manageTexture; // Load the Textures from the states
-	Texture* manageTexture1;
-	Texture* manageTexture2;
 
 	SDL_Renderer* renderer;
 	enum AppState currentState; // Enum variable to track the current state of the application
