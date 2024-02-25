@@ -2,12 +2,12 @@
 #include <string>
 class Task
 {
-private:
-	int goal;
-	int currentScore;
 public:
+	int level;
+	int goal;
+	int currentScore = 0;
 	Task(int goal,
-		 int currentScore) : goal(goal), currentScore(currentScore) {}
+		int level) : goal(goal),level(level) {}
 
 	void evaluateScore()
 	{

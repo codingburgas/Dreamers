@@ -8,8 +8,9 @@ GameGraphics* GameGraphics::Instance()
 	if (singletonInstance == nullptr)
 	{
 		singletonInstance = new GameGraphics(); // Create a new GameGraphics instance and assing it to singletonInstance
-		return singletonInstance;
 	}
+	return singletonInstance;
+
 }
 
 void GameGraphics::Release()

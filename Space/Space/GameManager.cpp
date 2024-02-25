@@ -34,6 +34,8 @@ GameManager::GameManager()
 	mTimer = Timer::Instance();
 
 	manageTexture = new Texture("Start-Menu.png");
+	taskManager = TaskManager();
+	textManager = TextManager(20);
 }
 
 // Destructor
@@ -138,7 +140,10 @@ void GameManager::Run()
 			case STATE_EXIT:
 				mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
 				break;
-
+			case STATE_TASKS:
+				manageTexture->Render();
+				textManager.Render();
+				break;
 			default:
 				break;
 			}
@@ -193,6 +198,28 @@ void GameManager::LoadInformationTexture()
 		break;
 	default:
 		break;
+	}
+}
+
+void GameManager::LoadPlanetTasks() {
+	switch (currentLevel)
+	{
+	case 0:
+		manageTexture = new Texture("Venus-Tasks.png");
+		textManager.ResetText();
+		textManager.AddText(taskManager.GetTaskText(currentLevel, 0), 900, 100, 100, 70);
+		textManager.AddText(taskManager.GetTaskText(currentLevel, 1), 900, 210, 100, 70);
+		textManager.AddText(taskManager.GetTaskText(currentLevel, 2), 900, 320, 100, 70);
+		textManager.AddText(taskManager.GetTaskText(currentLevel, 3), 900, 440, 100, 70);
+		break;
+	case 1:
+		manageTexture = new Texture("Earth-Tasks.png");
+		break;
+	case 2:
+		manageTexture = new Texture("Saturn-Tasks.png");
+		break;
+	case 3:
+		manageTexture = new Texture("Neptune-Tasks.png");
 	}
 }
 
@@ -318,6 +345,7 @@ void GameManager::LoadButtons()
 				{
 					instance->LoadPlanetImage();
 				}
+				instance->taskManager.EvaluateScore(instance->currentLevel);
 				return true;
 			}
 		),
@@ -347,6 +375,15 @@ void GameManager::LoadButtons()
 			}
 		),
 
+		Button(870, 500, 110, 100, STATE_GAME, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->currentState = STATE_TASKS;
+				instance->LoadPlanetTasks();
+				return true;
+			}
+		),
+
 		Button(22, 22, 39, 26, STATE_GAME_BOOK, []()
 			{
 				GameManager* instance = GameManager::Instance();
@@ -370,7 +407,7 @@ void GameManager::LoadLevel()
 	{
 		// Venus
 	case 0:
-		planetHealth = 2;
+		planetHealth = 20;
 		break;
 		// Earth
 	case 1:

@@ -6,5 +6,6 @@ enum AppState {
 	STATE_STEPS, // State to take us to the steps pages
 	STATE_EXIT, // State to exit the game
 	STATE_GAME_BOOK,
-	STATE_END
+	STATE_END,
+	STATE_TASKS
 };

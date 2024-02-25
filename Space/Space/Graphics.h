@@ -8,6 +8,7 @@ class Mouse;
 class GameGraphics {
 
 public:
+	SDL_Renderer* renderer;
 
 	// Constants for screen size
 	static const int screenWidth = 1000;
@@ -34,7 +35,6 @@ private:
 
 	SDL_Window* mainWindow; // SDL window used for rendering
 	SDL_Surface* mainBackBuffer;
-	SDL_Renderer* renderer;
 
 	GameGraphics(); // Constructor to enforce singleton pattern
 	~GameGraphics(); // Destructor to clean up resources

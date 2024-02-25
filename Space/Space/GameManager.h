@@ -5,7 +5,8 @@
 #include "Button.h"
 #include "AppStates.h"
 #include <vector>
-
+#include "TextManager.h"
+#include "TaskManager.h"
 class GameManager {
 
 public:
@@ -17,6 +18,7 @@ public:
 	void LoadButtons();
 	void LoadLevel();
 	void LoadPlanetImage();
+	void LoadPlanetTasks();
 	void EndGame();
 	void LoadInformationTexture();
 	void LoadTexture(int stepsPage);
@@ -28,7 +30,8 @@ public:
 	Texture* planet;
 private:
 	std::vector<Button> buttons;
-
+	TextManager textManager;
+	TaskManager taskManager;
 	static GameManager* singletonInstance;
 	const int FRAME_RATE = 60;
 	bool mainQuit;   // Flag to indicate if the game shoul guit
@@ -42,7 +45,6 @@ private:
 
 	Texture* manageTexture; // Load the Textures from the states
 
-	SDL_Renderer* renderer;
 	enum AppState currentState; // Enum variable to track the current state of the application
 
 	GameManager();
