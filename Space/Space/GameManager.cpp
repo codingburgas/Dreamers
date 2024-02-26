@@ -360,6 +360,7 @@ void GameManager::loadButtons()
 					{
 						instance->loadLevel();
 					}
+					return true;
 				}
 				else
 				{
@@ -443,15 +444,16 @@ void GameManager::loadButtons()
 			}
 		),
 
-		Button(840, 35, 115, 25, STATE_END, []()
+		Button(188, 143, 157, 37, STATE_END, []()
 			{
 				GameManager* instance = GameManager::Instance();
 				instance->currentState = STATE_MAIN_MENU;
+				instance->setTexture("Start-Menu.png");
 				return true;
 			}
 		),
 
-		Button(840, 35, 115, 25, STATE_END, []()
+		Button(305, 251, 151, 29, STATE_END, []()
 			{
 				GameManager* instance = GameManager::Instance();
 				instance->currentState = STATE_EXIT;
@@ -498,5 +500,13 @@ void GameManager::loadPlanetImage()
 void GameManager::endGame()
 {
 	currentState = STATE_END;
+	currentLevel = 0;
+	currentDamage = 0;
 	manageTexture = new Texture("End-Game.png");
+}
+
+
+void GameManager::setTexture(std::string path)
+{
+	manageTexture = new Texture(path);
 }

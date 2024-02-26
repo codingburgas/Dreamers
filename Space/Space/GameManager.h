@@ -61,6 +61,8 @@ public:
 	// This method is used to load textures based on the number of pages to be displayed.
 	void loadTexture(int stepsPage);
 
+	void setTexture(std::string path);
+	
 	// Initialize the pages, used to specify the page or to load the numbers of the pages
 	int stepsPage = 0; 
 	int planetHealth;
