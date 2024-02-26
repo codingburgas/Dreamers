@@ -1,14 +1,15 @@
 <h1 align="center">DREAMERS</h1>
 
 <p align="center">
-    <img src="!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+    <img src="https://media.discordapp.net/attachments/1202314715636961413/1210645348129701948/DREAMERS_.png?ex=65eb5057&is=65d8db57&hm=df59c9b746a474265dc57da69ef657ab96ccd2f42cfe077ac042f64757bc204d&=&format=webp&quality=lossless&width=600&height=600">
 </p>
 <img src="https://cdn.discordapp.com/attachments/1103246649075171390/1116130271583031347/line-light.jpg"/>
 
 ##  About
 <p align="center">Game about space which is not only interesting, but also educational!</p>
+<p align="center">To make the game we used SDL2, TFF, SDL_image</p>
 <p align="center">
-    <img src="https://cdn.discordapp.com/attachments/1103246649075171390/1116130271583031347/line-light.jpg"/>
+    <https://media.discordapp.net/attachments/1202314715636961413/1210645348129701948/DREAMERS_.png?ex=65eb5057&is=65d8db57&hm=df59c9b746a474265dc57da69ef657ab96ccd2f42cfe077ac042f64757bc204d&=&format=webp&quality=lossless&width=600&height=600img src="https://cdn.discordapp.com/attachments/1103246649075171390/1116130271583031347/line-light.jpg"/>
 </p>
 
 ##  Our Tech Stack
@@ -37,9 +38,9 @@
 ##  Documents
 
 ### Documentation
-  - 
+  - <a href = "11111111111111111111111111111111111111">Documentation</a>
 ### Presentation
-  - 
+  - <a href = "https://codingburgas-my.sharepoint.com/:p:/g/personal/aapopova22_codingburgas_bg/EQ6lAgHxswJOusdtNMPSHzkBCaPM4jSzGDxgINdEflQ-MQ?e=UGmLKZ">Presentation</a>
 
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/1103246649075171390/1116130271583031347/line-light.jpg"/>
@@ -57,7 +58,7 @@ If you want to install our game, here's the link for you:
 ##  Our Team
 
 - <a href = "https://github.com/AAPopova22">Arina Popova</a> (Scrum trainer)
-- <a href = "https://github.com/DDStoilova">Dniela Stoilova</a> (Developer)
+- <a href = "https://github.com/DDStoilova22">Daniela Stoilova</a> (Developer)
 - <a href = "https://github.com/MSBkumtseva22">Maria Bakumtseva</a> (Developer)
 - <a href = "https://github.com/PDDineva22">Polina Dineva</a> (Developer)
 
