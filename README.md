@@ -38,18 +38,9 @@
 ##  Documents
 
 ### Documentation
-  - <a href = "11111111111111111111111111111111111111">Documentation</a>
+  - <a href = "https://codingburgas-my.sharepoint.com/:w:/g/personal/aapopova22_codingburgas_bg/EUmK5_5EqoFHuxlCEDrU4rYBVnRPgEspJ4gIj9GMueYSDQ?e=R7m78u">Documentation</a>
 ### Presentation
   - <a href = "https://codingburgas-my.sharepoint.com/:p:/g/personal/aapopova22_codingburgas_bg/EQ6lAgHxswJOusdtNMPSHzkBCaPM4jSzGDxgINdEflQ-MQ?e=UGmLKZ">Presentation</a>
-
-<p align="center">
-    <img src="https://cdn.discordapp.com/attachments/1103246649075171390/1116130271583031347/line-light.jpg"/>
-</p>
-
-##  Installation
-
-If you want to install our game, here's the link for you:
-<pre>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</pre>
 
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/1103246649075171390/1116130271583031347/line-light.jpg"/>
