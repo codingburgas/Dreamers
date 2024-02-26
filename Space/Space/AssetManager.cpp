@@ -10,7 +10,7 @@ AssetManager* AssetManager::Instance() {
 
 	return singletonInstance;
 }
-void AssetManager::Release() {
+void AssetManager::release() {
 	delete singletonInstance;
 	singletonInstance = NULL;
 }
@@ -23,12 +23,14 @@ AssetManager::~AssetManager()
 	// Iterates through the assetTextures map, which stores texture assets as key-value pairs
 	for (std::pair<std::string, SDL_Texture*> texture : assetTextures)
 	{
-		if (texture.second != nullptr) // Checks if the texture pointer is not nullptr, then destroys the SDL_Texture
+		// Checks if the texture pointer is not nullptr, then destroys the SDL_Texture
+		if (texture.second != nullptr) 
 		{
 			SDL_DestroyTexture(texture.second);
 		}
 	}
-	assetTextures.clear();  // Clears the assetTextures map
+	// Clears the assetTextures map
+	assetTextures.clear();  
 }
 
 // Loading and returning a texture based on filename
@@ -40,7 +42,8 @@ SDL_Texture* AssetManager::GetTexture(std::string filename)
 
 	// Load the texture using and store it in the assetTextures map
 	if (assetTextures[fullPath] == nullptr)
-		assetTextures[fullPath] = GameGraphics::Instance()->LoadTexture(fullPath);
+		assetTextures[fullPath] = GameGraphics::Instance()->loadTexture(fullPath);
 
-	return assetTextures[fullPath]; // Return the texture associated with the fullPath key in the assetTextures map
+	// Return the texture associated with the fullPath key in the assetTextures map
+	return assetTextures[fullPath]; 
 }

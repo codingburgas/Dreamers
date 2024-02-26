@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\SDL2_ttf-2.0.15\include;$(SolutionDir)\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\SDL2-2.0.8\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\includes\SDL2_ttf-2.0.15\include;$(SolutionDir)\includes\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\includes\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\includes\SDL2-2.0.8\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)\SDL2_ttf-2.0.15\include;$(SolutionDir)\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\SDL2-2.0.8\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\includes\SDL2_ttf-2.0.15\include;$(SolutionDir)\includes\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\includes\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\includes\SDL2-2.0.8\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
@@ -129,7 +129,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\includes\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\includes\SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -148,14 +148,23 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\includes\SDL2_ttf-2.0.15\lib\x64;$(SolutionDir)\includes\SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppStates.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MathHelper.h" />
@@ -164,17 +173,6 @@
     <ClInclude Include="TextManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="AppStates.h" />
-    <ClCompile Include="AssetManager.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="GameEntity.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

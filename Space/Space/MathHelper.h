@@ -1,7 +1,9 @@
 #include <math.h>
 
-const float PI = 3.14159265f; // PI value
-const float DEG_TO_RAD = PI / 180.0F; // Conversion factor from degrese to radians
+// PI value
+const float PI = 3.14159265f; 
+// Conversion factor from degrese to radians
+const float DEG_TO_RAD = PI / 180.0F; 
 
 // 2D Vector structure
 struct Vector2 {
@@ -12,20 +14,21 @@ struct Vector2 {
 	// Constructor with default values
 	// The constructor initializes the x and y components of the vector with the default values
 	Vector2(float _x = 0.0f, float _y = 0.0f)
-		:x(_x), y(_y){} // Initialized the x and y components to given values
+		// Initialized the x and y components to given values
+		:x(_x), y(_y){} 
 	
 	// Calculate the square of the magnitude of the vector
-	float MagnitudeSqr()
+	float magnitudeSqr()
 	{
 		return x * x + y * y;
 	}
 	// Calculate the magnitude of the vector
-	float Magnitude() {
+	float magnitude() {
 		return (float)sqrt(x * x + y * y);
 	}
 	// Return a normalized version of the vector
-	Vector2 Normalized() {
-		float mag = Magnitude();
+	Vector2 normalized() {
+		float mag = magnitude();
 		return Vector2(x / mag, y / mag);
 	}
 };
@@ -39,7 +42,7 @@ inline Vector2 operator-(const Vector2& Ihs, const Vector2& rhs) {
 }
 
 // Function to rotate a vector by a specified angle in degrees
-inline Vector2 RotateVector(Vector2& vec, float angle)
+inline Vector2 rotateVector(Vector2& vec, float angle)
 {
 	float radAngle = (float)(angle * DEG_TO_RAD); // Convert angle to radians
 	// Returns a new Vector2 representing the input vector rotated by the specified angle

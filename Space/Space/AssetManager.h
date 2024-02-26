@@ -1,14 +1,9 @@
 #pragma once
 #include "Graphics.h"
-#include <map> // Allows storing elements in key-value pairs
+// Allows storing elements in key-value pairs
+#include <map> 
 
 class AssetManager {
-
-public:
-	static AssetManager* Instance();
-	static void Release();
-
-	SDL_Texture* GetTexture(std::string filename); // Get a texture based on the filename
 
 private:
 
@@ -21,5 +16,10 @@ private:
 	AssetManager();
 	~AssetManager();
 
+public:
+	static AssetManager* Instance();
+	static void release();
 
+	// Get a texture based on the filename
+	SDL_Texture* GetTexture(std::string filename); 
 };

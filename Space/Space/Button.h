@@ -5,17 +5,22 @@
 #include "AppStates.h"
 
 class Button {
+
 private:
 	AppState state;
 	bool (*callBack)();
+
 public:
-	SDL_Rect buttonRect; // Rectangle representing the button's position and size
+	// Rectangle representing the button's position and size
+	SDL_Rect buttonRect;
 
-	Button(int xStart, int yStart, int xEnd, int yEnd, AppState state, bool (*callBack)()); // Constructor for creating a button with given coordinates
-	Button(int xStart, int yStart, int xEnd, int yEnd); // Constructor for creating a button with given coordinates
+	// Constructor for creating a button with given coordinates
+	Button(int xStart, int yStart, int xEnd, int yEnd, AppState state, bool (*callBack)());
+	// Constructor for creating a button with given coordinates
+	Button(int xStart, int yStart, int xEnd, int yEnd); 
 
-
-	bool isMouseOverButton(int mousePositionX, int mousePositionY); // Check if the mouse is over the button
+	// Check if the mouse is over the button
+	bool isMouseOverButton(int mousePositionX, int mousePositionY); 
 
 	bool click(int mousePositionX, int mousePositionY, AppState currState);
 };

@@ -32,7 +32,7 @@ public:
 	{
 	}
 
-	void AddText(std::string text, int x, int y, int width, int height)
+	void addText(std::string text, int x, int y, int width, int height)
 	{
 		SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
 		SDL_Rect destRect = { x, y, width, height };
@@ -40,7 +40,7 @@ public:
 		texts.push_back(std::pair<SDL_Texture*, SDL_Rect>(SDL_CreateTextureFromSurface(GameGraphics::Instance()->renderer, textSurface), destRect));
 	}
 
-	void Render()
+	void render()
 	{
 		for (size_t i = 0; i < texts.size(); i++)
 		{
@@ -48,7 +48,7 @@ public:
 		}
 	}
 
-	void ResetText()
+	void resetText()
 	{
 		texts.clear();
 	}

@@ -3,10 +3,13 @@
 
 int main(int argc, char* argv[])
 {
-	GameManager* game = GameManager::Instance(); // Create an instance of the GameManager to manage the game
-	game->Run();
-	GameManager::Release(); // Release recources held by the GameManager
+	// Create an instance of the GameManager to manage the game
+	GameManager* game = GameManager::Instance(); 
+	game->run();
+	// Release recources held by the GameManager
+	GameManager::release(); 
 	game = NULL;
 
-	return 0; // Indicate a successful program execution
+	// Indicate a successful program execution
+	return 0; 
 }

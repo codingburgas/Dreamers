@@ -29,8 +29,10 @@ bool Button::isMouseOverButton(int mousePositionX, int mousePositionY) {
 
 bool Button::click(int mousePositionX, int mousePositionY, AppState currentState)
 {
+	// It checks if the mouse is over the button and the current state matches the button's state.
 	if (isMouseOverButton(mousePositionX, mousePositionY) && currentState == state)
 	{
+		// If both conditions are met, it calls the callback function associated with the button and returns true.
 		return callBack();
 	}
 	return false;

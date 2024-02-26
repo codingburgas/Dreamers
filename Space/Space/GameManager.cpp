@@ -12,7 +12,7 @@ GameManager* GameManager::Instance()
 	return singletonInstance;
 }
 
-void GameManager::Release() {
+void GameManager::release() {
 	delete singletonInstance;
 	singletonInstance = NULL;
 }
@@ -21,11 +21,12 @@ void GameManager::Release() {
 GameManager::GameManager()
 {
 	mainQuit = false;
-	mainGraphics = GameGraphics::Instance(); // Obtain a singleton instance of the GameGraphics class for rendering
+	// Obtain a singleton instance of the GameGraphics class for rendering
+	mainGraphics = GameGraphics::Instance(); 
 	currentState = STATE_MAIN_MENU;
 
 	// Check if GameGraphics initialization failed
-	if (!GameGraphics::Initialized()) {
+	if (!GameGraphics::initialized()) {
 		mainQuit = true;
 	}
 
@@ -35,20 +36,20 @@ GameManager::GameManager()
 
 	manageTexture = new Texture("Start-Menu.png");
 	taskManager = TaskManager();
-	textManager = TextManager(20);
+	textManager = TextManager(15);
 }
 
 // Destructor
 GameManager::~GameManager()
 {
 	// Destructor releases resources, including calling the finction
-	GameGraphics::Release();
+	GameGraphics::release();
 	mainGraphics = NULL;
 
-	AssetManager::Release();
+	AssetManager::release();
 	mainAssetManager = NULL;
 
-	Timer::Release();
+	Timer::release();
 	mTimer = NULL;
 
 	delete manageTexture;
@@ -56,13 +57,13 @@ GameManager::~GameManager()
 }
 
 
-void GameManager::Run()
+void GameManager::run()
 {
-	LoadButtons();
+	loadButtons();
 	// Continue the game  
 	while (!mainQuit)
 	{
-		mTimer->Update();
+		mTimer->update();
 
 		// Continuously check and handle SDL events
 		while (SDL_PollEvent(&mainEvents) != 0)
@@ -116,9 +117,9 @@ void GameManager::Run()
 
 		}
 
-		if (mTimer->DeltaTime() >= (1.0f / FRAME_RATE))
+		if (mTimer->deltaTime() >= (1.0f / FRAME_RATE))
 		{
-			mainGraphics->ClearBackBuffer();
+			mainGraphics->clearBackBuffer();
 
 			// Use a switch statement to determine the current state of the game
 			switch (currentState)
@@ -128,32 +129,35 @@ void GameManager::Run()
 			case STATE_MAIN_MENU:
 			case STATE_END:
 			case STATE_STEPS:
-				manageTexture->Render(); // Render the textures associated with the main menu
+				manageTexture->render(); // Render the textures associated with the main menu
 				break;
 
 				// If the game is in the game state
 			case STATE_GAME:
-				manageTexture->Render();
-				planet->RenderDestination();
+				manageTexture->render();
+				planet->renderDestination();
 				break;
 
 			case STATE_EXIT:
-				mainQuit = true; // Set the mainQuit flag to true, indicating the program exit
+				// Set the mainQuit flag to true, indicating the program exit
+				mainQuit = true;
 				break;
 			case STATE_TASKS:
-				manageTexture->Render();
-				textManager.Render();
+				manageTexture->render();
+				textManager.render();
 				break;
 			default:
 				break;
 			}
-			mainGraphics->Render(); // Render graphics
-			mTimer->Reset(); // Reset the timer to its initial state
+			// Render graphics
+			mainGraphics->render(); 
+			// Reset the timer to its initial state
+			mTimer->reset(); 
 		}
 	}
 }
 
-void GameManager::LoadTexture(int stepsPage)
+void GameManager::loadTexture(int stepsPage)
 {
 	// Switch statement to load different textures based on the stepsPage value
 	switch (stepsPage)
@@ -180,7 +184,8 @@ void GameManager::LoadTexture(int stepsPage)
 	}
 }
 
-void GameManager::LoadInformationTexture()
+// It switches between different cases representing different levels to load the corresponding texture image for information display.
+void GameManager::loadInformationTexture()
 {
 	switch (currentLevel)
 	{
@@ -201,31 +206,46 @@ void GameManager::LoadInformationTexture()
 	}
 }
 
-void GameManager::LoadPlanetTasks() {
+void GameManager::loadPlanetTasks() {
 	switch (currentLevel)
 	{
 	case 0:
 		manageTexture = new Texture("Venus-Tasks.png");
-		textManager.ResetText();
-		textManager.AddText(taskManager.GetTaskText(currentLevel, 0), 900, 100, 100, 70);
-		textManager.AddText(taskManager.GetTaskText(currentLevel, 1), 900, 210, 100, 70);
-		textManager.AddText(taskManager.GetTaskText(currentLevel, 2), 900, 320, 100, 70);
-		textManager.AddText(taskManager.GetTaskText(currentLevel, 3), 900, 440, 100, 70);
+		textManager.resetText();
+		textManager.addText(taskManager.GetTaskText(currentLevel, 0), 880, 90, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 1), 880, 220, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 2), 880, 360, 100, 70);
 		break;
 	case 1:
 		manageTexture = new Texture("Earth-Tasks.png");
+		textManager.resetText();
+		textManager.addText(taskManager.GetTaskText(currentLevel, 0), 880, 90, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 1), 880, 220, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 2), 890, 360, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 3), 880, 500, 100, 70);
 		break;
 	case 2:
 		manageTexture = new Texture("Saturn-Tasks.png");
+		textManager.resetText();
+		textManager.addText(taskManager.GetTaskText(currentLevel, 0), 880, 90, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 1), 880, 220, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 2), 890, 360, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 3), 880, 500, 100, 70);
 		break;
 	case 3:
 		manageTexture = new Texture("Neptune-Tasks.png");
+		textManager.resetText();
+		textManager.addText(taskManager.GetTaskText(currentLevel, 0), 880, 90, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 1), 880, 220, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 2), 890, 360, 100, 70);
+		textManager.addText(taskManager.GetTaskText(currentLevel, 3), 880, 500, 100, 70);
+		break;
 	}
 }
 
 
 
-void GameManager::LoadButtons()
+void GameManager::loadButtons()
 {
 	buttons = std::vector<Button>
 	{
@@ -233,7 +253,7 @@ void GameManager::LoadButtons()
 			{
 				GameManager* instance = GameManager::Instance();
 				instance->currentState = STATE_GAME;
-				instance->LoadLevel();
+				instance->loadLevel();
 				return true;
 			}
 		),
@@ -264,7 +284,7 @@ void GameManager::LoadButtons()
 				}
 				// Decrement stepsPage and load the corresponding texture
 				instance->stepsPage--;
-				instance->LoadTexture(instance->stepsPage); // Or load the previous step page
+				instance->loadTexture(instance->stepsPage); // Or load the previous step page
 				return true;
 			}
 		),
@@ -278,7 +298,7 @@ void GameManager::LoadButtons()
 				}
 				// Increment stepsPage and load the corresponding texture
 				instance->stepsPage++;
-				instance->LoadTexture(instance->stepsPage);
+				instance->loadTexture(instance->stepsPage);
 				return true;
 			}
 		),
@@ -302,7 +322,7 @@ void GameManager::LoadButtons()
 				// Check if stepsPage is 3
 				if (instance->stepsPage == 3)
 				{
-					instance->LoadLevel();
+					instance->loadLevel();
 					instance->stepsPage = 0;
 					instance->currentState = STATE_GAME;
 					return true;
@@ -334,18 +354,18 @@ void GameManager::LoadButtons()
 					instance->currentDamage = 0;
 					if (instance->currentLevel == 4)
 					{
-						instance->EndGame();
+						instance->endGame();
 					}
 					else
 					{
-						instance->LoadLevel();
+						instance->loadLevel();
 					}
 				}
 				else
 				{
-					instance->LoadPlanetImage();
+					instance->loadPlanetImage();
 				}
-				instance->taskManager.EvaluateScore(instance->currentLevel);
+				instance->taskManager.evaluateScore(instance->currentLevel);
 				return true;
 			}
 		),
@@ -370,7 +390,7 @@ void GameManager::LoadButtons()
 				GameManager* instance = GameManager::Instance();
 
 				instance->currentState = STATE_GAME_BOOK;
-				instance->LoadInformationTexture();
+				instance->loadInformationTexture();
 				return true;
 			}
 		),
@@ -379,7 +399,7 @@ void GameManager::LoadButtons()
 			{
 				GameManager* instance = GameManager::Instance();
 				instance->currentState = STATE_TASKS;
-				instance->LoadPlanetTasks();
+				instance->loadPlanetTasks();
 				return true;
 			}
 		),
@@ -389,25 +409,68 @@ void GameManager::LoadButtons()
 				GameManager* instance = GameManager::Instance();
 
 				instance->currentState = STATE_GAME;
-				instance->LoadPlanetImage();
+				instance->loadPlanetImage();
 				instance->manageTexture = new Texture("level-" + std::to_string(instance->currentLevel) + ".png");
 
+				return true;
+			}
+		),
+
+		Button(22, 22, 39, 26, STATE_TASKS, []()
+		{
+			GameManager* instance = GameManager::Instance();
+			instance->currentState = STATE_GAME;
+			instance->loadPlanetImage();
+			instance->manageTexture = new Texture("level-" + std::to_string(instance->currentLevel) + ".png");
+			return true;
+			}
+		),
+
+		Button(686, 37, 120, 25, STATE_GAME, []()
+		{
+			GameManager* instance = GameManager::Instance();
+			instance->currentState = STATE_MAIN_MENU;
+			instance->manageTexture = new Texture("Start-Menu.png");
+			return true;
+			}
+		), 
+
+		Button(840, 35, 115, 25, STATE_GAME, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->currentState = STATE_EXIT;
+				return true;
+			}
+		),
+
+		Button(840, 35, 115, 25, STATE_END, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->currentState = STATE_MAIN_MENU;
+				return true;
+			}
+		),
+
+		Button(840, 35, 115, 25, STATE_END, []()
+			{
+				GameManager* instance = GameManager::Instance();
+				instance->currentState = STATE_EXIT;
 				return true;
 			}
 		),
 	};
 }
 
-void GameManager::LoadLevel()
+void GameManager::loadLevel()
 {
-	LoadPlanetImage();
+	loadPlanetImage();
 	manageTexture = new Texture("level-" + std::to_string(currentLevel) + ".png");
 
 	switch (currentLevel)
 	{
 		// Venus
 	case 0:
-		planetHealth = 20;
+		planetHealth = 2;
 		break;
 		// Earth
 	case 1:
@@ -426,14 +489,14 @@ void GameManager::LoadLevel()
 	}
 }
 
-void GameManager::LoadPlanetImage()
+void GameManager::loadPlanetImage()
 {
 	std::string planetName = "planeta" + std::to_string(currentLevel) + "-" + std::to_string(currentDamage) + ".png";
 	planet = new Texture(planetName, 300, 180, 400, 350);
 }
 
-void GameManager::EndGame()
+void GameManager::endGame()
 {
 	currentState = STATE_END;
-	manageTexture = new Texture("EndGame.png");
+	manageTexture = new Texture("End-Game.png");
 }

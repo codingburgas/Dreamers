@@ -7,13 +7,14 @@ GameGraphics* GameGraphics::Instance()
 {
 	if (singletonInstance == nullptr)
 	{
-		singletonInstance = new GameGraphics(); // Create a new GameGraphics instance and assing it to singletonInstance
+		// Create a new GameGraphics instance and assing it to singletonInstance
+		singletonInstance = new GameGraphics(); 
 	}
 	return singletonInstance;
 
 }
 
-void GameGraphics::Release()
+void GameGraphics::release()
 {
 	delete singletonInstance;
 	singletonInstance = NULL;
@@ -22,23 +23,26 @@ void GameGraphics::Release()
 }
 
 // Check if GameGraphics has been initialized
-bool GameGraphics::Initialized()
+bool GameGraphics::initialized()
 {
-	return Initialized;
+	return initialized;
 }
 
 GameGraphics::GameGraphics() {
 	mainBackBuffer = NULL;
-	singletonInitialized = Init(); // Initialize the signleton instance and update the initialization status
+	// Initialize the signleton instance and update the initialization status
+	singletonInitialized = Init(); 
 }
 GameGraphics::~GameGraphics()
 {
 	SDL_DestroyWindow(mainWindow);
 	mainWindow = NULL;
-	SDL_DestroyRenderer(renderer); // Destroy the SDL renderer and set the pointer to NULL for safety
+	// Destroy the SDL renderer and set the pointer to NULL for safety
+	SDL_DestroyRenderer(renderer); 
 
+	// Quit the SDL subsystem, releasing resources
 	IMG_Quit();
-	SDL_Quit(); // Quit the SDL subsystem, releasing resources
+	SDL_Quit(); 
 }
 
 // Initialize SDL and create the main window
@@ -85,7 +89,7 @@ bool GameGraphics::Init()
 }
 
 // This function loads a texture from a specified file path
-SDL_Texture* GameGraphics::LoadTexture(std::string path)
+SDL_Texture* GameGraphics::loadTexture(std::string path)
 {
 	SDL_Texture* texture=NULL;
 	// Load the image surface from the file path
@@ -109,23 +113,24 @@ SDL_Texture* GameGraphics::LoadTexture(std::string path)
 	return texture; // Return the created texture
 }
 
-void GameGraphics::ClearBackBuffer() {
+void GameGraphics::clearBackBuffer() {
 	SDL_RenderClear(singletonInstance->renderer);
 }
 
 // Draw the texture to the entire screen
-void GameGraphics::DrawTexture(SDL_Texture* texture) {
+void GameGraphics::drawTexture(SDL_Texture* texture) {
 	// The entire texture will be drawn at its ariginal size and positions
 	SDL_RenderCopy(singletonInstance->renderer, texture, nullptr, nullptr);
 }
 
-void GameGraphics::DrawTexture(SDL_Texture* texture, SDL_Rect* destinationRect)
+void GameGraphics::drawTexture(SDL_Texture* texture, SDL_Rect* destinationRect)
 {
 	SDL_RenderCopy(singletonInstance->renderer, texture, nullptr, destinationRect);
 }
 
 // Update the window surface
-void GameGraphics::Render()
+void GameGraphics::render()
 {
-	SDL_RenderPresent(singletonInstance->renderer);  // Present the rendered graphics on the screen using the SDL renderer
+	// Present the rendered graphics on the screen using the SDL renderer
+	SDL_RenderPresent(singletonInstance->renderer);  
 }

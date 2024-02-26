@@ -5,14 +5,17 @@ class Timer {
 public:
 
 	static Timer* Instance();
-	static void Release();
-	void Reset();
+	static void release();
+	void reset();
 
-	float DeltaTime(); // Gets the time elapsed since the last frame in seconds 
-	void TimeScale(float t); // Sets the time scaling factor
-	float TimeScale(); // Gets the current time scaling factor
+	// Gets the time elapsed since the last frame in seconds 
+	float deltaTime(); 
+	// Sets the time scaling factor
+	void timeScale(float t);
+	// Gets the current time scaling factor
+	float timeScale(); 
 
-	void Update();
+	void update();
 
 private:
 
@@ -21,8 +24,10 @@ private:
 	unsigned int mainStartTicks;
 	unsigned int mainElapsedTicks;
 
-	float mainDelataTime; // Time intervals
-	float mainTimeScale; // Time scaling factor applied to control the speed of the time
+	// Time intervals
+	float mainDelataTime;
+	// Time scaling factor applied to control the speed of the time
+	float mainTimeScale; 
 	
 	// Constructor and Destructor
 	Timer();
