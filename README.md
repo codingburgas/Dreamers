@@ -50,7 +50,7 @@
 
 - <a href = "https://github.com/AAPopova22">Arina Popova</a> (Scrum trainer)
 - <a href = "https://github.com/DDStoilova22">Daniela Stoilova</a> (Developer)
-- <a href = "https://github.com/MSBkumtseva22">Maria Bakumtseva</a> (Developer)
+- <a href = "https://github.com/MSBakumtseva22">Maria Bakumtseva</a> (Developer)
 - <a href = "https://github.com/PDDineva22">Polina Dineva</a> (Developer)
 
 <p align="center">
