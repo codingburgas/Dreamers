@@ -168,7 +168,6 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Graphics.h" />
-    <ClInclude Include="MathHelper.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="TextManager.h" />
